@@ -46,8 +46,10 @@ android {
         }
 
         debug {
-            // You can keep it unsigned (default) or use the same signing config
-            signingConfig = signingConfigs.getByName("release")
+            // Uses Android's default auto-generated debug keystore - no external
+            // file needed. The release signing config above points to a keystore
+            // that only exists on one developer's local machine, so debug builds
+            // (including CI) must not depend on it.
             isMinifyEnabled = false
             isShrinkResources = false
             isDebuggable = true
