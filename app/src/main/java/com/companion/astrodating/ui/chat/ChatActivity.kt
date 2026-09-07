@@ -606,6 +606,16 @@ class ChatActivity : BaseActivity(), View.OnClickListener {
 //        chatViewModel.sendMessagePushNotification(secondaryUserId, message)
 
         chatViewModel.checkIfMessageCanBeSent(primaryAgoraUserId, secondaryUserId) { allowed, msg ->
+            if (msg == "TECHNICAL_ERROR") {
+                showAlert(
+                    "Couldn't Send Message",
+                    "We couldn't verify your message limit right now. Please check your connection and try again.",
+                    "Retry",
+                    "Cancel",
+                    onPositive = { sendMessage(message) }
+                )
+                return@checkIfMessageCanBeSent
+            }
             if (allowed) {
                 if (containsContactInfo(message) && isFreeUser) {
                     showAlert(

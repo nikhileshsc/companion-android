@@ -139,7 +139,15 @@ class ChatViewModel @Inject constructor(
                     is ApiResult.Error -> {
 //                        _checkMessageLimitState.value = UiState.Error(result.errorCode, result.errorMessage)
                         print("Error: ${result.errorMessage}")
-                        onResult(false, result.errorMessage)
+                        if (result.errorCode == 403 || result.errorCode == 402) {
+                            // Genuine backend response: limit actually reached / benefits exhausted
+                            onResult(false, result.errorMessage)
+                        } else {
+                            // Network/timeout/server error - NOT an actual limit reached.
+                            // Use a distinguishable marker so the UI shows an accurate
+                            // "couldn't verify, try again" message instead of "Limit Reached".
+                            onResult(false, "TECHNICAL_ERROR")
+                        }
                     }
 
                     is ApiResult.Success -> {
