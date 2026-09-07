@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Soft outer glow -->
+    <item>
+        <shape android:shape="oval">
+            <size android:width="136dp" android:height="136dp"/>
+            <solid android:color="#1A000000"/>
+        </shape>
+    </item>
+
+    <!-- Ring + clipping circle -->
+    <item android:width="128dp" android:height="128dp" android:gravity="center">
+        <shape android:shape="oval">
+            <solid android:color="@android:color/transparent"/>
+            <stroke android:width="1.5dp" android:color="#33FFFFFF"/>
+        </shape>
+    </item>
+</layer-list>

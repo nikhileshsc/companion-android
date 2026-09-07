@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.updateProfile.ui.basicDetails.ui.BasicDetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clMaritalStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilMaritalStatus"
+                style="@style/BasicDetailsTextInputLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:startIconDrawable="@drawable/ic_basicdetails_maritalstatus">
+
+                <AutoCompleteTextView
+                    android:id="@+id/tvMaritalStatus"
+                    style="@style/BasicDetailsTextView"
+                    android:text="@string/text_basicdetails_selectyourstatus"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilLookingFor"
+                style="@style/BasicDetailsTextInputLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilMaritalStatus"
+                app:startIconDrawable="@drawable/ic_basicdetails_lookingfor">
+
+                <AutoCompleteTextView
+                    android:id="@+id/tvLookingFor"
+                    style="@style/BasicDetailsTextView"
+                    android:text="@string/text_basicdetails_lookingfor"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilHeight"
+                style="@style/BasicDetailsTextInputLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilLookingFor"
+                app:startIconDrawable="@drawable/ic_basicdetails_height">
+
+                <AutoCompleteTextView
+                    android:id="@+id/tvHeight"
+                    style="@style/BasicDetailsTextView"
+                    android:text="@string/text_basicdetails_height"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilReligion"
+                style="@style/BasicDetailsTextInputLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilHeight"
+                app:startIconDrawable="@drawable/ic_basicdetails_religion">
+
+                <AutoCompleteTextView
+                    android:id="@+id/tvReligion"
+                    style="@style/BasicDetailsTextView"
+                    android:text="@string/text_basicdetails_religion"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilCommunity"
+                style="@style/BasicDetailsTextInputLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilReligion"
+                app:startIconDrawable="@drawable/ic_basicdetails_community">
+
+                <AutoCompleteTextView
+                    android:id="@+id/tvCommunity"
+                    style="@style/BasicDetailsTextView"
+                    android:text="@string/text_basicdetails_community"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilCity"
+                style="@style/BasicDetailsTextInputLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilCommunity"
+                app:startIconDrawable="@drawable/ic_basicdetails_city">
+
+                <AutoCompleteTextView
+                    android:id="@+id/tvCity"
+                    style="@style/BasicDetailsTextView"
+                    android:text="@string/text_basicdetails_city"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilProfession"
+                style="@style/BasicDetailsTextInputLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilCity"
+                app:startIconDrawable="@drawable/ic_basicdetails_profession">
+
+                <AutoCompleteTextView
+                    android:id="@+id/tvProfession"
+                    style="@style/BasicDetailsTextView"
+                    android:text="@string/text_basicdetails_profession"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEducation"
+                style="@style/BasicDetailsTextInputLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilProfession"
+                app:startIconDrawable="@drawable/ic_basicdetails_selecteducation">
+
+                <AutoCompleteTextView
+                    android:id="@+id/tvEducation"
+                    style="@style/BasicDetailsTextView"
+                    android:text="@string/text_basicdetails_education"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSave"
+                style="@style/primaryButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:text="@string/text_save_title"
+                app:cornerRadius="@dimen/_20sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilEducation" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

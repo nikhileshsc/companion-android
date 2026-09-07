@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clItem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/_2sdp"
+    android:paddingEnd="@dimen/_2sdp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardProfile"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/_16sdp"
+        app:cardElevation="@dimen/_4sdp"
+        app:strokeColor="@color/colorHint"
+        app:strokeWidth="0.5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay" />
+
+            <ImageView
+                android:id="@+id/ivProfileStatus"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/bg_label_white"
+                android:padding="@dimen/_4sdp"
+                android:src="@drawable/ic_status_verified"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Black Gradient Overlay -->
+            <View
+                android:id="@+id/vGradientOverlay"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/gradient_overlay_black"
+                app:layout_constraintBottom_toBottomOf="@id/ivProfile"
+                app:layout_constraintEnd_toEndOf="@id/ivProfile"
+                app:layout_constraintStart_toStartOf="@id/ivProfile"
+                app:layout_constraintTop_toTopOf="@id/ivProfile" />
+
+            <!-- User Info Bottom Left -->
+            <LinearLayout
+                android:id="@+id/llUserInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_12sdp"
+                android:layout_marginStart="0dp"
+                android:orientation="vertical"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintEnd_toStartOf="@id/llActionButtons"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvUserName"
+                        style="@style/TextFontSofiaProBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_18sdp"
+                        tools:text="Katja, 54" />
+
+                    <TextView
+                        android:id="@+id/tvUserId"
+                        style="@style/TextFontSofiaProBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:text="CMP0001"
+                        android:textColor="@color/colorHint"
+                        android:textSize="@dimen/_10sdp"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/ivUserInfo"-->
+<!--                        android:layout_width="@dimen/_14sdp"-->
+<!--                        android:layout_height="@dimen/_14sdp"-->
+<!--                        android:layout_marginEnd="@dimen/_6sdp"-->
+<!--                        android:src="@drawable/ic_home_aboutinfo" />-->
+
+                    <TextView
+                        android:id="@+id/tvUserInfo"
+                        style="@style/TextFontSofiaProRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10sdp"
+                        tools:text="Select your City" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Compatibility Report pill -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCompatibilityReport"
+                style="@style/Widget.Material3.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:backgroundTint="#6C3CE9"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingStart="@dimen/_12sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_8sdp"
+                android:text="Compatibility\nReport"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:lineSpacingExtra="1dp"
+                app:cornerRadius="@dimen/_18sdp"
+                app:icon="@drawable/ic_status_verified"
+                app:iconGravity="textStart"
+                app:iconSize="20dp"
+                app:iconTint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/llActionButtons" />
+
+            <!-- Action Buttons Bottom Right -->
+            <LinearLayout
+                android:id="@+id/llActionButtons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_12sdp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/ivProfile">
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/ivChat"
+                    style="@style/Widget.Material3.Button.Icon"
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
+                    android:backgroundTint="#25D77C"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="0dp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    app:cornerRadius="@dimen/_25sdp"
+                    app:icon="@drawable/ic_home_chat"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="57dp"
+                    app:iconTint="@null" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/ivSendInterest"
+                    style="@style/Widget.Material3.Button.Icon"
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:backgroundTint="#DC154A"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="0dp"
+                    app:cornerRadius="@dimen/_25sdp"
+                    app:icon="@drawable/home_sendinterest"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="40dp"
+                    app:iconTint="@null"
+                    app:rippleColor="@color/white" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/ivShortlist"
+                    style="@style/Widget.Material3.Button.Icon"
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
+                    android:backgroundTint="#3482f7"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="0dp"
+                    app:cornerRadius="@dimen/_25sdp"
+                    app:icon="@drawable/home_starcircle"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="45dp"
+                    app:iconTint="@null" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:id="@+id/bioText"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/_14sdp"
+            android:layout_height="@dimen/_14sdp"
+            android:src="@drawable/ic_home_aboutinfo" />
+
+        <TextView
+            android:text="Bio"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- User Details Cards Below Photo -->
+    <LinearLayout
+        android:id="@+id/llUserDetailsCards"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginBottom="-12dp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:weightSum="3">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/clUserMaritalStatus"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="@dimen/_1sdp"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="2dp"
+            app:cardMaxElevation="2dp"
+            app:cardPreventCornerOverlap="false"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.TopRounded"
+            app:strokeWidth="0dp">
+
+            <!-- CHANGED: Using ShapeableImageView instead of View -->
+            <!-- This ensures the child itself respects clipping and handles overlays better -->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_gravity="end|top"
+                android:layout_marginTop="-22dp"
+                android:layout_marginEnd="-10dp"
+                android:src="@drawable/bg_circle_overlay_blue"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.BlueCircleClip" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:paddingVertical="@dimen/_6sdp">
+
+                <TextView
+                    android:id="@+id/tvUserMaritalStatus"
+                    style="@style/TextFontSofiaProRegular"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="@color/colorOtpText"
+                    android:textSize="@dimen/_9sdp"
+                    tools:text="Single" />
+
+                <ImageView
+                    android:id="@+id/ivUserMaritalStatus"
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:src="@drawable/icons8_wedding_rings_64" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/clUserProfession"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.TopRounded"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="false"
+            app:cardElevation="6dp"
+            app:cardMaxElevation="6dp"
+            app:strokeWidth="0dp"
+            app:strokeColor="@android:color/transparent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.AllRounded"
+                android:layout_height="65dp"
+                android:layout_width="65dp"
+                android:layout_gravity="end|top"
+                android:layout_marginTop="-22dp"
+                android:layout_marginEnd="-10dp"
+                android:clipToOutline="true"
+                android:background="@color/quantum_googgreen100" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_6sdp"
+                android:paddingHorizontal="@dimen/_4sdp">
+
+                <TextView
+                    android:id="@+id/tvUserProfession"
+                    style="@style/TextFontSofiaProRegular"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:textColor="@color/colorOtpText"
+                    android:textSize="@dimen/_9sdp"
+                    tools:text="Business and Finance" />
+
+                <ImageView
+                    android:id="@+id/ivUserProfession"
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:src="@drawable/icons8_suitcase_32"
+                    app:tint="@color/com_facebook_blue" />
+
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/clUserEducation"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/white"
+            android:layout_marginEnd="@dimen/_3sdp"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.TopRounded"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="false"
+            app:cardElevation="6dp"
+            app:cardMaxElevation="6dp"
+            app:strokeWidth="0dp"
+            app:strokeColor="@android:color/transparent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.AllRounded"
+                android:layout_height="65dp"
+                android:layout_width="65dp"
+                android:layout_gravity="end|top"
+                android:layout_marginTop="-22dp"
+                android:layout_marginEnd="-10dp"
+                android:background="@color/quantum_pink50" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="@dimen/_6sdp"
+                android:paddingHorizontal="@dimen/_8sdp">
+
+                <TextView
+                    android:id="@+id/tvUserEducation"
+                    style="@style/TextFontSofiaProRegular"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:textColor="@color/colorOtpText"
+                    android:textSize="@dimen/_9sdp"
+                    tools:text="Master of Business Administration (MBA)" />
+
+
+                <ImageView
+                    android:id="@+id/ivUserEducation"
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_1sdp"
+                    android:background="@android:color/transparent"
+                    app:tint="@color/quantum_orange300"
+                    android:src="@drawable/graduation_cap" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</LinearLayout>

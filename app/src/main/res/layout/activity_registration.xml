@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.registration.ui.RegistrationActivity">
+
+    <!--  <ImageView
+          android:id="@+id/ivBack"
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          android:layout_marginTop="@dimen/_8sdp"
+          android:layout_marginEnd="@dimen/_8sdp"
+          android:layout_marginBottom="@dimen/_8sdp"
+          app:layout_constraintBottom_toBottomOf="@id/guideline_horizontal_top"
+          app:layout_constraintEnd_toStartOf="@id/tvToolbarTitle"
+          app:layout_constraintStart_toStartOf="@id/guideline_vertical_start"
+          app:layout_constraintTop_toTopOf="parent" />-->
+
+    <TextView
+        android:id="@+id/tvToolbarTitle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_56sdp"
+        android:fontFamily="@font/poppins_medium"
+        android:gravity="center"
+        android:text="@string/text_reg_fill_details"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/btnSubmit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_rounded_corners"
+                app:layout_constraintBottom_toBottomOf="@id/etFullName"
+                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
+                app:layout_constraintStart_toStartOf="@id/etFullName"
+                app:layout_constraintTop_toTopOf="@id/etFullName" />
+
+            <EditText
+                android:id="@+id/etFullName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:background="@null"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="@string/text_reg_full_name"
+                android:imeOptions="actionNext"
+                android:padding="@dimen/_12sdp"
+                android:textColor="@color/colorTextReg"
+                android:textColorHint="@color/colorTextRegHint"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_vertical_start"
+                app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_top" />
+
+            <TextView
+                android:id="@+id/tvFullNameWarning"
+                style="@style/TextFontPoppinsMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:textColor="@color/colorTextRegWarning"
+                android:text="@string/text_reg_full_name_warning"
+                android:textSize="@dimen/_8sdp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+
+            <TextView
+                android:id="@+id/tvGender"
+                style="@style/primaryTextHeader"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/text_reg_gender_title"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <RadioGroup
+                android:id="@+id/rbGroupGender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
+                app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
+                app:layout_constraintTop_toBottomOf="@+id/tvGender">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbGenderMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_gender_selector"
+                    android:button="@android:color/transparent"
+                    android:checked="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:text="@string/text_reg_gender_male"
+                    android:textColor="@color/gender_text_selector"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbGenderFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_gender_selector"
+                    android:button="@android:color/transparent"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:text="@string/text_reg_gender_female"
+                    android:textColor="@color/gender_text_selector"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbGenderOther"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_gender_selector"
+                    android:button="@android:color/transparent"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:text="@string/text_reg_gender_other"
+                    android:textColor="@color/gender_text_selector"
+                    android:textSize="@dimen/_10sdp"
+                    android:textStyle="bold" />
+            </RadioGroup>
+
+            <!--
+                <ImageView
+                    android:id="@+id/ivProfileName"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/etFullName"
+                    app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
+                    app:layout_constraintTop_toTopOf="@id/etFullName"
+                    app:layout_constraintVertical_bias="0.5"
+                    app:srcCompat="@drawable/ic_user" />
+            -->
+
+            <View
+                android:id="@+id/containerBirthdate"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_rounded_corners"
+                app:layout_constraintBottom_toBottomOf="@id/tvSelectBirthdate"
+                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
+                app:layout_constraintStart_toStartOf="@id/tvSelectBirthdate"
+                app:layout_constraintTop_toTopOf="@id/tvSelectBirthdate" />
+
+            <TextView
+                android:id="@+id/tvSelectBirthdate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_22sdp"
+                android:background="@null"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="@string/text_reg_birth_date"
+                android:padding="@dimen/_12sdp"
+                android:textColor="@color/colorTextReg"
+                android:textColorHint="@color/colorTextRegHint"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toStartOf="@id/ivBirthdate"
+                app:layout_constraintStart_toStartOf="@id/guideline_vertical_start"
+                app:layout_constraintTop_toBottomOf="@id/rbGroupGender" />
+
+            <ImageView
+                android:id="@+id/ivBirthdate"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvSelectBirthdate"
+                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
+                app:layout_constraintTop_toTopOf="@id/tvSelectBirthdate"
+                app:layout_constraintVertical_bias="0.5"
+                app:srcCompat="@drawable/ic_registration_birthdate" />
+
+            <View
+                android:id="@+id/containerTime"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_rounded_corners"
+                app:layout_constraintBottom_toBottomOf="@id/tvSelectBirthTime"
+                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
+                app:layout_constraintStart_toStartOf="@id/tvSelectBirthTime"
+                app:layout_constraintTop_toTopOf="@id/tvSelectBirthTime" />
+
+            <TextView
+                android:id="@+id/tvSelectBirthTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:background="@null"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="@string/text_reg_birth_time"
+                android:padding="@dimen/_12sdp"
+                android:text="12:00"
+                android:textColor="@color/colorTextReg"
+                android:textColorHint="@color/colorTextRegHint"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toStartOf="@id/ivBirthTime"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/guideline_vertical_start"
+                app:layout_constraintTop_toBottomOf="@id/tvSelectBirthdate" />
+
+            <ImageView
+                android:id="@+id/ivBirthTime"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvSelectBirthTime"
+                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
+                app:layout_constraintTop_toTopOf="@id/tvSelectBirthTime"
+                app:layout_constraintVertical_bias="0.5"
+                app:srcCompat="@drawable/ic_registration_birthtime" />
+
+            <View
+                android:id="@+id/containerLocation"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_rounded_corners"
+                app:layout_constraintBottom_toBottomOf="@id/tvCityOfBirth"
+                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
+                app:layout_constraintStart_toStartOf="@id/tvCityOfBirth"
+                app:layout_constraintTop_toTopOf="@id/tvCityOfBirth" />
+
+            <AutoCompleteTextView
+                android:id="@+id/tvCityOfBirth"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_24sdp"
+                android:background="@null"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="@string/text_reg_birth_city"
+                android:inputType="none"
+                android:padding="@dimen/_12sdp"
+                android:textColor="@color/colorTextReg"
+                android:textColorHint="@color/colorTextRegHint"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintEnd_toStartOf="@id/ivBirthLocation"
+                app:layout_constraintStart_toStartOf="@id/guideline_vertical_start"
+                app:layout_constraintTop_toBottomOf="@id/tvSelectBirthTime" />
+
+
+            <ImageView
+                android:id="@+id/ivBirthLocation"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                app:layout_constraintBottom_toBottomOf="@id/tvCityOfBirth"
+                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
+                app:layout_constraintTop_toTopOf="@id/tvCityOfBirth"
+                app:layout_constraintVertical_bias="0.5"
+                app:srcCompat="@drawable/ic_registration_city" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilCommunity"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:endIconDrawable="@drawable/ic_down_arrow"
+                android:background="@drawable/bg_rounded_corners"
+                app:boxBackgroundColor="@color/colorVerticalLine1"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_vertical_start"
+                app:layout_constraintTop_toBottomOf="@id/tvCityOfBirth">
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/tvCommunity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="none"
+                    android:maxLines="1"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:singleLine="true"
+                    android:text="@string/text_reg_community"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorTextReg"
+                    android:textColorHint="@color/colorTextRegHint"
+                    android:textSize="@dimen/_12sdp"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilCurrentCity"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:endIconDrawable="@drawable/ic_down_arrow"
+                android:background="@drawable/bg_rounded_corners"
+                app:boxBackgroundColor="@color/colorVerticalLine1"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_vertical_start"
+                app:layout_constraintTop_toBottomOf="@id/tilCommunity">
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/tvCurrentCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="none"
+                    android:maxLines="1"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:singleLine="true"
+                    android:text="@string/text_reg_current_city"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorTextReg"
+                    android:textColorHint="@color/colorTextRegHint"
+                    android:textSize="@dimen/_12sdp"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tvBirthTimeNote"
+                style="@style/TextFontPoppinsMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:textColor="@color/colorTextReg"
+                android:text="@string/text_reg_birth_time_warning"
+                android:textSize="@dimen/_10sdp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
+                app:layout_constraintTop_toBottomOf="@+id/tilCurrentCity" />
+
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/_20sdp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/_20sdp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_horizontal_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="@dimen/_56sdp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSubmit"
+        style="@style/primaryButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_40sdp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/text_submit_title"
+        app:cornerRadius="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

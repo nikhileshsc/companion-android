@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_8sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_8sdp">
+
+    <ImageView
+        android:id="@+id/ivFilterItem"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:src="@drawable/checkbox_selector"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvItem"
+        style="@style/TextFontPoppinsRegular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/text_filter_all"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12sdp"
+        android:gravity="top"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintBottom_toBottomOf="@id/ivFilterItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivFilterItem"
+        app:layout_constraintTop_toTopOf="@id/ivFilterItem" />
+</androidx.constraintlayout.widget.ConstraintLayout>

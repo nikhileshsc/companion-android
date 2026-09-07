@@ -1,0 +1,20 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="174dp"
+    android:height="174dp"
+    android:viewportWidth="174"
+    android:viewportHeight="174">
+
+  <!-- Background Card Shape -->
+<!--  <path-->
+<!--      android:pathData="M32.22,0L141.75,0A32.22,32.22 0,0 1,173.96 32.22L173.96,141.75A32.22,32.22 0,0 1,141.75 173.96L32.22,173.96A32.22,32.22 0,0 1,0 141.75L0,32.22A32.22,32.22 0,0 1,32.22 0z"-->
+<!--      android:fillColor="#ffffff"/>-->
+
+  <!-- Filter Sliders Path -->
+  <!-- Changed strokeColor to #000000 for 'Selected' state visibility -->
+  <path
+      android:pathData="M35,55 L75,55 M95,55 L139,55 M85,55 C85,62 79,68 73,68 C65,68 59,62 59,55 C59,48 65,42 72,42 C79,42 85,48 85,55 Z M35,109 L60,109 M80,109 L139,109 M70,109 C70,116 64,122 57,122 C50,122 44,116 44,109 C44,102 50,96 57,96 C64,96 70,102 70,109 Z"
+      android:strokeColor="#ffffff"
+      android:strokeWidth="10"
+      android:strokeLineCap="round"
+      android:strokeLineJoin="round"/>
+</vector>

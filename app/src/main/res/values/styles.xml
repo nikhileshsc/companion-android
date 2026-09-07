@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="RoundedAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="background">@drawable/bg_alert_dialog_rounded</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="ShapeAppearance.TopRounded" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">12dp</item>
+        <item name="cornerSizeTopRight">12dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <style name="ShapeAppearance.AllRounded" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="ShapeAppearance.BlueCircleClip" parent="">
+        <item name="cornerFamily">rounded</item>
+        <!-- Match the 12dp from your Card's ShapeAppearance.TopRounded -->
+        <item name="cornerSizeTopRight">12dp</item>
+        <!-- Keep the other sides square or 0dp because they are inside the card -->
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+    <style name="BadgeStyle" parent="Widget.MaterialComponents.Badge">
+        <item name="badgeShapeAppearance">@style/BadgeShapeAppearance</item>
+        <item name="badgeRadius">@dimen/badge_dot_radius</item>
+        <item name="badgeWithTextRadius">@dimen/badge_dot_radius</item>
+    </style>
+
+    <style name="BadgeShapeAppearance">
+        <item name="cornerSize">50%</item>
+    </style>
+</resources>

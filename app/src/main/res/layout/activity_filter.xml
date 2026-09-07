@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/detail_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:behavior_hideable="true"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    style="@style/TextFontPoppinsBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_28sdp"
+                    android:gravity="center"
+                    android:text="@string/text_filter_title"
+                    android:textColor="@color/colorTitle"
+                    android:textSize="@dimen/_18sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0" />
+
+                <ImageView
+                    android:id="@+id/ivClose"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:src="@drawable/ic_home_search_cancel"
+                    app:layout_constraintBottom_toBottomOf="@id/tvTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvTitle" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/clFilterOptions"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@color/colorFilterBg"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_20sdp"
+                    android:paddingBottom="@dimen/_30sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitle">
+
+                    <TextView
+                        android:id="@+id/tvCommunity"
+                        style="@style/FilterOptionText"
+                        android:layout_marginTop="@dimen/_28sdp"
+                        android:text="@string/text_filter_community"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvCity"
+                        style="@style/FilterOptionText"
+                        android:text="@string/text_filter_city"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvCommunity" />
+
+                    <TextView
+                        android:id="@+id/tvCountry"
+                        style="@style/FilterOptionText"
+                        android:text="@string/text_filter_country"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvCity" />
+
+                    <TextView
+                        android:id="@+id/tvEduction"
+                        style="@style/FilterOptionText"
+                        android:text="@string/text_filter_education"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvCountry" />
+
+                    <TextView
+                        android:id="@+id/tvHeight"
+                        style="@style/FilterOptionText"
+                        android:text="@string/text_filter_height"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvEduction" />
+
+                    <TextView
+                        android:id="@+id/tvAge"
+                        style="@style/FilterOptionText"
+                        android:text="@string/text_filter_age"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvHeight" />
+
+                    <TextView
+                        android:id="@+id/tvMaritalStatus"
+                        style="@style/FilterOptionText"
+                        android:text="@string/text_filter_maritalstatus"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvAge" />
+
+                    <TextView
+                        android:id="@+id/tvProfession"
+                        style="@style/FilterOptionText"
+                        android:text="@string/text_filter_profession"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvMaritalStatus" />
+
+                    <TextView
+                        android:id="@+id/tvReligion"
+                        style="@style/FilterOptionText"
+                        android:text="@string/text_filter_religion"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvProfession" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tvReset"
+                    style="@style/TextFontPoppinsMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:padding="@dimen/_8sdp"
+                    android:text="@string/text_filter_reset"
+                    android:textColor="@color/colorFilterReset"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardSearchView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/colorFilterBg"
+                    app:cardCornerRadius="@dimen/_8sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/clFilterOptions"
+                    app:layout_constraintTop_toBottomOf="@id/tvReset">
+
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/searchView"
+                        style="@style/SearchViewStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/_8sdp"
+                        android:paddingBottom="@dimen/_8sdp"
+                        app:closeIcon="@drawable/ic_home_search_cancel"
+                        app:searchIcon="@drawable/ic_home_search" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <ImageView
+                    android:id="@+id/ivFilterItem"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_checkbox_unselected"
+                    app:layout_constraintStart_toEndOf="@id/clFilterOptions"
+                    app:layout_constraintTop_toBottomOf="@id/cardSearchView" />
+
+                <TextView
+                    android:id="@+id/tvSelectAll"
+                    style="@style/TextFontPoppinsRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_filter_all"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@id/ivFilterItem"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.1"
+                    app:layout_constraintStart_toEndOf="@id/ivFilterItem"
+                    app:layout_constraintTop_toTopOf="@id/ivFilterItem" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCommunity"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@id/btnApplyFilter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/clFilterOptions"
+                    app:layout_constraintTop_toBottomOf="@id/ivFilterItem"
+                    tools:listitem="@layout/row_item_filter" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCity"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@id/btnApplyFilter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/clFilterOptions"
+                    app:layout_constraintTop_toBottomOf="@id/ivFilterItem"
+                    tools:listitem="@layout/row_item_filter" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCountry"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@id/btnApplyFilter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/clFilterOptions"
+                    app:layout_constraintTop_toBottomOf="@id/ivFilterItem"
+                    tools:listitem="@layout/row_item_filter" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvEducation"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@id/btnApplyFilter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/clFilterOptions"
+                    app:layout_constraintTop_toBottomOf="@id/ivFilterItem"
+                    tools:listitem="@layout/row_item_filter" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvHeight"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@id/btnApplyFilter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/clFilterOptions"
+                    app:layout_constraintTop_toBottomOf="@id/ivFilterItem"
+                    tools:listitem="@layout/row_item_filter" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAge"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@id/btnApplyFilter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/clFilterOptions"
+                    app:layout_constraintTop_toBottomOf="@id/ivFilterItem"
+                    tools:listitem="@layout/row_item_filter" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvMaritalStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@id/btnApplyFilter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/clFilterOptions"
+                    app:layout_constraintTop_toBottomOf="@id/ivFilterItem"
+                    tools:listitem="@layout/row_item_filter" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvProfession"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@id/btnApplyFilter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/clFilterOptions"
+                    app:layout_constraintTop_toBottomOf="@id/ivFilterItem"
+                    tools:listitem="@layout/row_item_filter" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvReligion"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@id/btnApplyFilter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/clFilterOptions"
+                    app:layout_constraintTop_toBottomOf="@id/ivFilterItem"
+                    tools:listitem="@layout/row_item_filter" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnApplyFilter"
+                    style="@style/TextFontPoppinsMedium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_40sdp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:padding="@dimen/_12sdp"
+                    android:text="@string/text_filter_applyfilter"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/_12sdp"
+                    app:cornerRadius="@dimen/_20sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

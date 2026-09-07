@@ -1,0 +1,30 @@
+package com.companion.astrodating.data.divineapi.data.requestData
+
+data class AshtakootMilanRequestData(
+    val api_key: String,
+    val p1_day: Int,
+    val p1_full_name: String,
+    val p1_gender: String,
+    val p1_hour: Int,
+    val p1_lat: Double,
+    val p1_lon: Double,
+    val p1_min: Int,
+    val p1_month: Int,
+    val p1_place: String,
+    val p1_sec: Int,
+    val p1_tzone: Double,
+    val p1_year: Int,
+    val p2_day: Int,
+    val p2_full_name: String,
+    val p2_gender: String,
+    val p2_hour: Int,
+    val p2_lat: Double,
+    val p2_lon: Double,
+    val p2_min: Int,
+    val p2_month: Int,
+    val p2_place: String,
+    val p2_sec: Int,
+    val p2_tzone: Double,
+    val p2_year: Int,
+    val lan: String
+)

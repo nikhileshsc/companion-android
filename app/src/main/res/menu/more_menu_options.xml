@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_block"
+        android:title="@string/text_block_user"
+        />
+    <item
+        android:id="@+id/action_un_block"
+        android:title="@string/text_un_block_user"
+        />
+    <item
+        android:id="@+id/action_decline_user"
+        android:title="@string/text_decline_interest"
+        />
+</menu>

@@ -1,0 +1,496 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Companion" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- font for all text views -->
+        <item name="android:textViewStyle">@style/TextFontPoppinsRegular</item>
+        <item name="android:windowTranslucentStatus">false</item>
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+
+
+
+    </style>
+
+    <style name="Theme.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="Theme.HomePage" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+<!--        <item name="android:statusBarColor">@color/white</item>-->
+    </style>
+
+    <!-- <style name="Theme.OtpScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+         <item name="android:statusBarColor">@color/colorOtpStatusBar</item>
+     </style>-->
+
+    <style name="primaryButton">
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="textAllCaps">false</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="android:padding">@dimen/_10sdp</item>
+    </style>
+
+    <style name="primaryTextHeader">
+        <item name="android:textSize">@dimen/_16sdp</item>
+        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="TextFontNimbusSansLBold" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/nimbus_sans_l_bold</item>
+        <item name="fontFamily">@font/nimbus_sans_l_bold</item>
+    </style>
+
+    <style name="TextFontPoppinsExtraBold" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/poppins_extra_bold</item>
+        <item name="fontFamily">@font/poppins_extra_bold</item>
+    </style>
+
+    <style name="TextFontPoppinsBold" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="fontFamily">@font/poppins_bold</item>
+    </style>
+
+    <style name="TextFontPoppinsSemiBold" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
+    </style>
+
+    <style name="TextFontPoppinsMedium" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="TextFontPoppinsRegular" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="TextFontSofiaProBlack" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/sofia_pro_black</item>
+        <item name="fontFamily">@font/sofia_pro_black</item>
+    </style>
+
+    <style name="TextFontSofiaProSemiBold" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/sofia_pro_semibold</item>
+        <item name="fontFamily">@font/sofia_pro_semibold</item>
+    </style>
+
+
+    <style name="TextFontSofiaProRegular" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/sofia_pro_regular</item>
+        <item name="fontFamily">@font/sofia_pro_regular</item>
+    </style>
+
+    <style name="TextFontOpenSansRegular" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/open_sans_regular</item>
+        <item name="fontFamily">@font/open_sans_regular</item>
+    </style>
+
+    <style name="TextFontOpenSansSemiBold" parent="Widget.AppCompat.TextView">
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+        <item name="fontFamily">@font/open_sans_semibold</item>
+    </style>
+
+
+    <style name="Theme.OnBoarding" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+<!--        <item name="android:statusBarColor">@color/colorPrimary</item>-->
+<!--        <item name="android:navigationBarColor">@color/colorPrimary</item>-->
+    </style>
+
+    <style name="ThemCustomDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="PaymentButtonStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/colorSecondary</item>
+        <item name="shapeAppearanceOverlay">@style/PaymentBtnShapeAppearance</item>
+    </style>
+
+    <style name="PaymentBtnShapeAppearance">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeTopLeft">@dimen/_8sdp</item>
+        <item name="cornerSizeTopRight">@dimen/_8sdp</item>
+    </style>
+
+    <style name="Theme.IntakeFormScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- font for all text views -->
+        <item name="android:textViewStyle">@style/TextFontPoppinsRegular</item>
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+    </style>
+
+    <style name="Theme.ChatScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- font for all text views -->
+        <item name="android:textViewStyle">@style/TextFontPoppinsRegular</item>
+<!--        <item name="android:statusBarColor">@color/colorSecondary</item>-->
+    </style>
+
+    <!--
+        <style name="Theme.FilterScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+            <item name="colorPrimary">@color/white</item>
+            <item name="colorPrimaryVariant">@color/white</item>
+            <item name="colorOnPrimary">@color/white</item>
+            <item name="colorSecondary">@color/colorBackground</item>
+            <item name="colorSecondaryVariant">@color/colorBackground</item>
+            <item name="colorOnSecondary">@color/white</item>
+
+            &lt;!&ndash; font for all text views &ndash;&gt;
+            <item name="android:textViewStyle">@style/TextFontPoppins</item>
+            <item name="android:statusBarColor">@color/colorBackground</item>
+        </style>
+    -->
+
+    <style name="Theme.FullScreen" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+<!--        <item name="android:navigationBarColor">@android:color/transparent</item>-->
+    </style>
+
+      <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+          <item name="android:windowIsFloating">false</item>
+<!--          <item name="android:statusBarColor">@android:color/transparent</item>-->
+          <item name="android:windowSoftInputMode">adjustResize</item>
+          <item name="bottomSheetStyle">@style/AppModalStyle</item>
+      </style>
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_half_rounded</item>
+    </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="queryBackground">@android:color/transparent</item>
+        <item name="queryHint">@string/text_home_search</item>
+        <item name="iconifiedByDefault">false</item>
+        <item name="android:textColor">@color/colorTextHomeSearch</item>
+        <item name="android:fontFamily">@font/sofia_pro_regular</item>
+        <item name="fontFamily">@font/sofia_pro_regular</item>
+    </style>
+    <style name="MessageSearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="queryBackground">@android:color/transparent</item>
+        <item name="queryHint">@string/text_message_search</item>
+        <item name="iconifiedByDefault">false</item>
+        <item name="android:textColor">@color/colorTextMessageSearch</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <!--  <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+          <item name="tabTextAppearance">@style/MyCustomTextAppearance</item>
+      </style>
+
+      <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
+          <item name="textAllCaps">false</item>
+      </style>-->
+
+    <style name="ProfileImage">
+        <item name="android:layout_width">@dimen/_20sdp</item>
+        <item name="android:layout_height">@dimen/_20sdp</item>
+        <item name="android:layout_margin">@dimen/_12sdp</item>
+    </style>
+
+    <style name="ProfileImageNext">
+        <item name="android:layout_width">@dimen/_24sdp</item>
+        <item name="android:layout_height">@dimen/_24sdp</item>
+        <item name="android:src">@drawable/ic_next_arrow</item>
+        <item name="android:layout_marginTop">@dimen/_12sdp</item>
+        <item name="android:layout_marginEnd">@dimen/_12sdp</item>
+        <item name="android:layout_marginBottom">@dimen/_12sdp</item>
+    </style>
+
+    <style name="ProfileText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/_12sdp</item>
+        <item name="android:layout_marginEnd">@dimen/_8sdp</item>
+        <item name="android:textColor">@color/colorOtpText</item>
+        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+        <item name="fontFamily">@font/open_sans_semibold</item>
+    </style>
+
+    <style name="ProfileView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginTop">@dimen/_12sdp</item>
+        <item name="android:layout_marginStart">@dimen/_12sdp</item>
+        <item name="android:layout_marginEnd">@dimen/_8sdp</item>
+        <item name="android:background">@color/colorProfileViewBg</item>
+    </style>
+
+    <style name="UpdateProfileText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/_8sdp</item>
+        <item name="android:layout_marginTop">@dimen/_12sdp</item>
+        <item name="android:layout_marginEnd">@dimen/_8sdp</item>
+        <item name="android:textColor">@color/colorOtpText</item>
+        <item name="android:textSize">@dimen/_14sdp</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="UpdateProfileEditText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/_8sdp</item>
+        <item name="android:layout_marginTop">@dimen/_12sdp</item>
+        <item name="android:layout_marginEnd">@dimen/_8sdp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/colorTextAboutProfileHint</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="android:padding">@dimen/_10sdp</item>
+        <item name="android:background">@drawable/bg_rounded_outline</item>
+        <item name="android:fadeScrollbars">false</item>
+        <item name="android:gravity">start</item>
+        <item name="android:lines">6</item>
+        <item name="android:scrollbars">vertical</item>
+
+    </style>
+
+    <style name="BasicDetailsTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/_48sdp</item>
+        <item name="android:background">@drawable/bg_rounded_outline</item>
+        <item name="endIconDrawable">@drawable/ic_down_arrow</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="android:layout_marginTop">@dimen/_12sdp</item>
+    </style>
+
+    <style name="BasicDetailsTextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/bg_rounded_outline</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+        <item name="android:inputType">none</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingStart">@dimen/_36sdp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
+    </style>
+
+    <style name="CustomTextAppearanceTab" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/_8sdp</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="ProfileDetailsAboutImage">
+        <item name="android:layout_width">@dimen/_20sdp</item>
+        <item name="android:layout_height">@dimen/_20sdp</item>
+    </style>
+
+    <style name="ProfileDetailsAboutText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/_10sdp</item>
+        <item name="android:textColor">@color/colorProfileDetailsDesc1</item>
+        <item name="android:textSize">@dimen/_13sdp</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+        <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="FilterOptionText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/_10sdp</item>
+        <item name="android:textColor">@color/bg_selector_filter_option</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="CompleteAnalysisText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/_10sdp</item>
+        <item name="android:textColor">@color/colorOtpText</item>
+        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="CompleteAnalysisImage">
+        <item name="android:layout_width">@dimen/_60sdp</item>
+        <item name="android:layout_height">@dimen/_60sdp</item>
+        <item name="android:layout_margin">@dimen/_20sdp</item>
+    </style>
+
+
+    <style name="ReportThumbImage">
+        <item name="android:layout_width">@dimen/_30sdp</item>
+        <item name="android:layout_height">@dimen/_30sdp</item>
+    </style>
+
+    <style name="ReportInfoImage">
+        <item name="android:layout_width">@dimen/_24sdp</item>
+        <item name="android:layout_height">@dimen/_24sdp</item>
+    </style>
+
+    <style name="ReportTitleText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/_8sdp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/_16sdp</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
+    </style>
+
+    <style name="ReportCountText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/_6sdp</item>
+        <item name="android:layout_marginEnd">@dimen/_6sdp</item>
+        <item name="android:textColor">@color/colorMarks</item>
+        <item name="android:textSize">@dimen/_13sdp</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
+    </style>
+
+    <style name="ReportView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:layout_marginTop">@dimen/_8sdp</item>
+        <item name="android:background">@color/colorProfileViewBg</item>
+    </style>
+
+    <style name="ReportDescText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/_10sdp</item>
+        <item name="android:textColor">@color/colorIntroDesc</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="AshtakootTitleText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/_8sdp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="AshtakootCountText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/_8sdp</item>
+        <item name="android:textColor">@color/colorMarks</item>
+        <item name="android:textSize">@dimen/_9sdp</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="TableTitleText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/_4sdp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/_9sdp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="fontFamily">@font/poppins_semibold</item>
+    </style>
+
+    <style name="TableTitleView">
+        <item name="android:layout_width">@dimen/_1sdp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="TableText">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/_4sdp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/_8sdp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="TableTextWithBlackColor">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/_4sdp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/_8sdp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="Theme.AppCompat.Translucent" parent="AppTheme1">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:screenOrientation">portrait</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTranslucentStatus">false</item>
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+        <item name="android:colorBackground">@android:color/transparent</item>
+    </style>
+    <style name="AppTheme1" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:windowDisablePreview">false</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+    </style>
+
+</resources>

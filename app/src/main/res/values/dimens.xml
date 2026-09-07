@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Add this if not already present -->
+    <dimen name="_12sdp">12dp</dimen>
+    <dimen name="_38sdp">38dp</dimen>
+    <dimen name="_30sdp">30dp</dimen>
+    <dimen name="_8sdp">88dp</dimen>
+    <dimen name="badge_dot_padding">8dp</dimen>
+    <dimen name="badge_dot_radius">10dp</dimen>
+</resources>

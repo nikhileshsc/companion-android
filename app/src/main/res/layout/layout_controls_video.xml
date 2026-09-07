@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/videoControls"
+    android:layout_width="match_parent"
+    android:layout_height="88dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:background="#1A000000"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
+
+    <ImageButton
+        android:id="@+id/btnMic"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:onClick="onLocalAudioMuteClicked"
+        android:src="@drawable/ic_mic_on"
+        android:contentDescription="@string/app_name"
+        app:tint="@color/white" />
+
+    <ImageButton
+        android:id="@+id/btnCam"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="12dp"
+        android:onClick="onLocalVideoMuteClicked"
+        android:src="@drawable/ic_videocam_on"
+        android:contentDescription="@string/app_name"/>
+
+    <ImageButton
+        android:id="@+id/btnSwitchCamera"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="12dp"
+        android:onClick="onSwitchCameraClicked"
+        android:src="@drawable/ic_switch_camera"
+        android:contentDescription="@string/app_name"/>
+
+    <ImageButton
+        android:id="@+id/btnSpeaker"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/ic_speaker"
+        android:contentDescription="@string/app_name"/>
+
+    <ImageButton
+        android:id="@+id/btnEnd"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:onClick="onEncCallClicked"
+        android:background="@drawable/bg_end_call_red"
+        android:src="@drawable/ic_call_end_white"
+        android:contentDescription="@string/app_name"/>
+</LinearLayout>

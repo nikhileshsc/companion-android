@@ -1,0 +1,416 @@
+<resources>
+    <string name="app_name">Companion</string>
+    <string name="text_onboarding_skip">Skip</string>
+    <string name="text_login_enter_phone_number">Enter Phone Number</string>
+    <string name="text_login_please_enter_phone_number">Please enter your number</string>
+    <string name="text_login_enter_email_address">Enter Email Address</string>
+    <string name="text_login_please_enter_email_address">Please enter your email address</string>
+    <string name="hint_mobile_number">Mobile Number</string>
+    <string name="hint_email_address">Email Address</string>
+    <string name="btn_request_otp">Request OTP</string>
+    <string name="text_seconds">seconds</string>
+    <string name="text_enter_otp">Enter OTP</string>
+    <string name="text_code_mobile_verification">We have sent the code verification to your mobile number</string>
+    <string name="text_code_email_verification">We have sent the code verification to your email address</string>
+    <string name="btn_text_login">Login</string>
+    <string name="text_did_not_get_code">Didn’t get the code?</string>
+    <string name="text_resend_otp_in">Resend OTP in </string>
+    <string name="text_resend_otp">Resend OTP</string>
+    <string name="text_loading_dialog">Please wait…</string>
+    <string name="text_no_internet_connection">No Internet Connection available</string>
+    <string name="text_no_invalid_otp">Invalid OTP entered </string>
+    <string name="error_message_select_country">Please select country</string>
+    <string name="error_message_select_mobile">Please enter mobile number</string>
+    <string name="error_message_invalid_mobile_number">Invalid number entered </string>
+    <string name="error_message_invalid_email_address">Invalid email address entered </string>
+
+    <!--OnBoarding Screen-->
+    <string name="text_onboarding_title">Lets begin the journey to find most suitable companion for you..</string>
+    <string name="text_onboarding_desc">Get ready to explore matches with astrological compatability. Our vedic science would help you find meaningful connections with the cosmic chemistry.</string>
+    <string name="text_onboarding_gunamatch">Guna Match</string>
+
+    <!--Registration Screen-->
+    <string name="text_reg_fill_details">Please fill in the details</string>
+    <string name="text_reg_full_name">Full Name<font color='#E74C3C'>*</font></string>
+    <string name="text_reg_gender_title">Gender<font color='#E74C3C'>*</font></string>
+    <string name="text_reg_gender_male">Male</string>
+    <string name="text_reg_gender_female">Female</string>
+    <string name="text_reg_gender_other">Other</string>
+    <string name="text_reg_birth_date">Birthdate<font color='#E74C3C'>*</font></string>
+    <string name="text_reg_birth_time">Time of Birth<font color='#E74C3C'>*</font></string>
+    <string name="text_reg_birth_city">City of Birth<font color='#E74C3C'>*</font></string>
+    <string name="text_reg_community">Community<font color='#E74C3C'>*</font></string>
+    <string name="text_reg_current_city">Current City<font color='#E74C3C'>*</font></string>
+    <string name="text_submit_title">Submit</string>
+    <string name="text_reg_full_name_warning">*Please enter your full name</string>
+    <string name="text_reg_birth_time_warning">Note: If the birth time is unknown, Select it as 12:00 PM (noon) for astrological calculations. This is a common practice, though an exact birth time provides more accurate results.</string>
+    <string name="text_upload_photo_warning">Note: Your profile is likely to be rejected if you don’t upload your real photo.</string>
+
+
+    <!--Dashboard Screen-->
+    <string name="text_dashboard_home">Home</string>
+    <string name="text_dashboard_message">Message</string>
+    <string name="text_dashboard_top">Top</string>
+    <string name="text_dashboard_interests">Interests</string>
+    <string name="text_dashboard_profile">Profile</string>
+
+
+    <!--Home Screen-->
+    <string name="text_home_search">Search Here By Profile ID</string>
+    <string name="text_message_search">Search Messages</string>
+    <string name="text_home_shortlist">Shortlist</string>
+    <string name="text_home_send_interest">Send Interest</string>
+    <string name="text_home_chat">Chat</string>
+
+    <!--Location Screen-->
+    <string name="text_location_title">Location</string>
+    <string name="text_location_sub_title">Please enable location access so \nwe could provide you accurate \nresults of nearest males &amp; females.</string>
+
+    <!--Push Notification Screen-->
+    <string name="text_notification_title">Notifications</string>
+    <string name="text_push_notification_title">Push Notifications</string>
+    <string name="text_push_notification_sub_title">Notifications may include alerts, \nsounds and icon badges. These can \nbe configured settings.</string>
+    <string name="text_proceed_title">Proceed</string>
+
+    <!--Top Matches Screen-->
+    <string name="text_top_matches_title">Top Matches</string>
+
+    <!--Interests Screen-->
+    <string name="text_interest_sentinterest">Sent Interest</string>
+    <string name="text_interest_receivedinterest">Received Interest</string>
+    <string name="text_interest_shortlisted">Shortlisted</string>
+    <string name="text_interest_blockedlist">Blocked List</string>
+    <string name="text_interest_declinedlist">Declined List</string>
+
+    <!--Contact Support Screen -->
+    <string name="text_contactsupport_title">Support / Feedback</string>
+    <string name="text_contactsupport_selectproblemtype">Please Select Problem Type</string>
+    <string name="text_contactsupport_problemindetails">Please write your problem in details(optional)</string>
+    <string name="text_contactsupport_attachscreenshot">Attach Screenshot (Optional)</string>
+
+    <!--Intro Screens-->
+    <string name="text_next_title">Next</string>
+    <string name="text_get_started">Get Started</string>
+
+    <!--Profile Fragment -->
+    <string name="text_profile_editmyprofile">Edit My Profile</string>
+    <string name="text_profile_managemyphotos">Manage My Photos</string>
+    <string name="text_profile_purchaseplans">Purchase Plans</string>
+    <string name="text_profile_completekycdetails">Complete KYC Details</string>
+    <string name="text_profile_contactsupport">Support / Feedback</string>
+    <string name="text_profile_privacypolicy">Privacy Policy</string>
+    <string name="text_profile_termsofuse">Terms Of Use</string>
+    <string name="text_profile_deletedata">Request To Delete Data</string>
+    <string name="text_profile_logout">Logout</string>
+
+    <!--About Fragment-->
+    <string name="text_about_title">About</string>
+    <string name="text_about_yourself_title">About Yourself</string>
+    <string name="text_about_yourself_hint">Please write about yourself here..</string>
+    <string name="text_about_interest_title">Interest</string>
+    <string name="text_about_interest_hint">Please write about your Interests…</string>
+    <string name="text_about_expectations_title">Expectations</string>
+    <string name="text_about_expectations_hint">Please write about your Expectations from your potential partner</string>
+    <string name="text_save_title">Save</string>
+    <string name="error_text_aboutyourself">Please enter about yourself</string>
+    <string name="error_text_interest">Please enter interest</string>
+    <string name="error_text_expectation">Please enter expectation</string>
+    <string name="error_contains_contact_info">It seems some fields mention your contact details. Please remove them.</string>
+    <string name="error_contains_contact_info_backend">Please remove contact details and save your profile.</string>
+
+    <!--Basic Details Fragment-->
+    <string name="text_basicdetails_title">Basic Details</string>
+    <string name="text_basicdetails_selectyourstatus">Select Your Status</string>
+    <string name="text_basicdetails_lookingfor">What are you looking for</string>
+    <string name="text_basicdetails_height">Select your Height</string>
+    <string name="text_basicdetails_religion">Select your Religion</string>
+    <string name="text_basicdetails_community">Select your Community</string>
+    <string name="text_basicdetails_city">Select your City</string>
+    <string name="text_basicdetails_profession">Select your Profession</string>
+    <string name="text_basicdetails_education">Select your Education</string>
+
+    <string name="error_text_basicdetails_selectyourstatus">Please Select Your Status</string>
+    <string name="error_text_basicdetails_lookingfor">Please Select Looking For</string>
+    <string name="error_text_basicdetails_height">Please Select Your Height</string>
+    <string name="error_text_basicdetails_religion">Please Select Your Religion</string>
+    <string name="error_text_basicdetails_community">Please Select Your Community</string>
+    <string name="error_text_basicdetails_city">Please Select Your City</string>
+    <string name="error_text_basicdetails_profession">Please Select Your Profession</string>
+    <string name="error_text_basicdetails_education">Please Select Your Education</string>
+
+    <!--Mandatory Details Fragment-->
+    <string name="text_mandatorydetails_title">Mandatory Details</string>
+    <string name="text_fullname_warning">*Please enter your full name</string>
+
+    <!--Update Profile Activity-->
+    <string name="text_updateprofile_title">Update Profile</string>
+
+
+    <string name="text_something_went_wrong">Something went wrong, please try after sometime</string>
+    <string name="error_text_fill_reg_details">Please fill mandatory details</string>
+    <string name="error_text_birthdate">Please select birth date above 18 years</string>
+    <string name="error_text_gender">Please select gender</string>
+    <string name="error_text_birthtime">Please select birth time</string>
+    <string name="error_text_birthcity">Please enter city of birth. </string>
+    <string name="error_text_community">Please select community</string>
+    <string name="error_text_current_city">Please select current city</string>
+    <string name="btn_text_okay">OK</string>
+
+    <!--Dialog-->
+    <string name="text_logged_out_title">Logged Out</string>
+    <string name="text_logged_out_message">You are logged out because\n you logged in on \nanother device</string>
+
+    <!--Profile Details Screen-->
+    <string name="text_profiledetails_gunamatch">Guna Match!</string>
+    <string name="text_profiledetails_unlockcompleteanalysis">Unlock Complete Analysis</string>
+
+    <!--Upgrade Membership Screen-->
+    <string name="text_upgrademembership_unlockfeature">Upgrade your membership to unlock these features :</string>
+    <string name="text_upgrademembership_featurechat">Chat</string>
+    <string name="text_upgrademembership_feature_compatibilityanalysis">Compatibility Analysis</string>
+    <string name="text_upgrademembership_upgradenow">Upgrade Now</string>
+    <string name="text_upgrademembership_details">Your membership details are : </string>
+    <string name="text_upgrademembership_subscriptionplan">Weekly Subscription Plan</string>
+    <string name="text_upgrademembership_valid">Valid Till : 15th Dec 2024</string>
+
+    <!--Purchase Plans Screen-->
+    <string name="text_purchaseplans_upgrademembership">Upgrade Membership</string>
+    <string name="text_purchaseplans_needhelp">Need Help?</string>
+    <string name="text_purchaseplans_compatabilityanalysis">Unlock Complete Compatability Analysis with our Guna Match (kundali match) based on Astrology and find your most suitable companion for healthier &amp; Happier relationship.</string>
+    <string name="text_purchaseplans_matchmakingreport">Match Making Report</string>
+    <string name="text_purchaseplans_ashtakootanalysis">1  -  Ashtaguna Analysis</string>
+    <string name="text_purchaseplans_dashkootanalysis">2 -  Dashguna Analysis</string>
+    <string name="text_purchaseplans_manglikanalysis">3 -  Manglik Analysis</string>
+    <string name="text_purchaseplans_astrologydetails">4 -  Astrology Details</string>
+    <string name="text_purchaseplans_specialplans">Special Plans</string>
+    <string name="text_purchaseplans_specialplans_desc">Choose the right plan for you</string>
+    <string name="text_purchaseplans_weekly_title">Weekly</string>
+    <string name="text_purchaseplans_weekly_report">5 Match Making Report</string>
+    <string name="text_purchaseplans_weekly_profileunlock">5 Profile Chats Unlock</string>
+    <string name="text_purchaseplans_monthly_title">Monthly</string>
+    <string name="text_purchaseplans_monthly_report">25 Match Making Report</string>
+    <string name="text_purchaseplans_monthly_chatunlock">25 Chats Unlock</string>
+    <string name="text_purchaseplans_yearly_title">Yearly</string>
+    <string name="text_purchaseplans_yearly_report">Unlimited Match Making Report</string>
+    <string name="text_purchaseplans_yearly_chatunlock">Unlimited Chats Unlock</string>
+    <string name="text_rupee">\u20B9</string>
+    <string name="text_purchaseplans_mostpopular">Most Popular</string>
+    <string name="text_purchaseplan_termsofuse"><u>Terms Of Use</u></string>
+    <string name="text_purchaseplan_privacypolicy"><u>Privacy Policy</u></string>
+
+    <!--Filter Screen -->
+    <string name="text_filter_title">Filter</string>
+    <string name="text_filter_community">Community</string>
+    <string name="text_filter_city">City</string>
+    <string name="text_filter_country">Country</string>
+    <string name="text_filter_education">Education</string>
+    <string name="text_filter_height">Height</string>
+    <string name="text_filter_age">Age</string>
+    <string name="text_filter_maritalstatus">Marital Status</string>
+    <string name="text_filter_profession">Profession</string>
+    <string name="text_filter_religion">Religion</string>
+    <string name="text_filter_all">All</string>
+    <string name="text_filter_reset">Reset</string>
+    <string name="text_filter_applyfilter">Apply Filter</string>
+    <string name="text_filter_selectcountry">Select Country</string>
+    <string name="text_filter_selectcommunity">Select Community</string>
+    <string name="text_filter_selectcity">Select City</string>
+    <string name="text_filter_selectreligion">Select Religion</string>
+    <string name="text_filter_selecteducation">Select Education</string>
+    <string name="text_filter_selectheight">Select Height</string>
+    <string name="text_filter_selectage">Select Age</string>
+    <string name="text_filter_selectmaritalstatus">Select Marital Status</string>
+    <string name="text_filter_selectprofession">Select Profession</string>
+
+    <!--Complete Analysis Screen -->
+    <string name="text_completeanalysis_ashtguna">Ashtaguna Analysis</string>
+    <string name="text_completeanalysis_dashguna">Dashaguna Analysis</string>
+    <string name="text_completeanalysis_astrology">Astrology Details</string>
+
+    <!--Match Making Report Screen -->
+    <string name="text_matchmakingreport_compatibilityscore_title">Overall Compatibility Score</string>
+    <string name="text_matchmakingreport_compatibilityscore_desc">Overall Score=(Ashtaguna Score+Dashaguna Score)/2</string>
+    <string name="text_matchmakingreport_ashtakoot_title">ASHTAGUNA</string>
+    <string name="text_matchmakingreport_ashtakoot_desc">In North India, there is a traditional and straightforward method of Kundli Milan called \"Ashtakoota Milan,\" which is part of Guna Milan. Guna Milan involves matching the horoscopes of two individuals to assess their compatibility for marriage. It focuses on evaluating eight qualities or aspects, known as \"Gunas,\" each assigned a numeric value based on their importance in determining various aspects of a couple\'s compatibility.</string>
+    <string name="text_matchmakingreport_dashakoot_title">DASHAGUNA</string>
+    <string name="text_matchmakingreport_dashakoot_desc">In ancient india, sages and saints devised a method called \'Marriage Matching\' or \'Match-making\' to ensure a long and nappy married life. This process involved assessing the matrimonial adaptability or compatibility between a couple based on the Birth Stars of the boy and the girl. Originally, they recommended 20 kootas for matching, but over time, the focus narrowed down to 10 essential kootas. In some regions of India, only 8 kootas are considered, and hence it is also popularly known as \'Das Poritham\' in Hindi or \'10 Porutham\' in Tamil</string>
+    <string name="text_matchmakingreport_manglik_title">MANGLIK</string>
+    <string name="text_matchmakingreport_manglik_desc">In the horoscope of boy or girl, the presence of mars, sun, saturn, Rahu, Ketu in the first
+fourth, seventh, eighth or twelveth house is believed to create a condition known as “Manglik Dosha.”
+
+The strength of Manglik dosh is considered
+more significant when Mars is positioned in
+the ascendant, compared to when it is co-
+joined with the Moon in the ascendant. If,
+according to the Shastras (ancient texts),
+the Manglik dosh is nullified for both the boy
+and the girl, they are believed to be destined
+for a happy and harmonious married life.
+However, if the Manglik dosh remains
+uncancelled, it is thought to lead to unnecessary problems and obstacles in
+their lives. Therefore, it is advisable for
+individuals to have their horoscopes
+thoroughly matched before embarking on
+married life. By properly nullifying the
+Manglik dosh, one can expect a life filled
+with peace and prosperity.</string>
+
+    <!--Ashtakoot Analysis Screen -->
+    <string name="text_ashtakootanalysis_title">Ashtaguna Analysis</string>
+
+    <!--Ashtakoot Table View -->
+    <string name="text_ashtakoot_attr_title">Attributes</string>
+    <string name="text_ashtakoot_attr_varna">Varna</string>
+    <string name="text_ashtakoot_attr_vashya">Vashya</string>
+    <string name="text_ashtakoot_attr_tara">Tara</string>
+    <string name="text_ashtakoot_attr_yoni">Yoni</string>
+    <string name="text_ashtakoot_attr_grahamaitri">Graha Maitri</string>
+    <string name="text_ashtakoot_attr_gana">Gana</string>
+    <string name="text_ashtakoot_attr_bhakoota">Bhakoota</string>
+    <string name="text_ashtakoot_attr_nadi">Nadi</string>
+    <string name="text_ashtakoot_desc_title">Description</string>
+
+    <string name="text_dashakoot_attr_dina">Dina</string>
+    <string name="text_dashakoot_attr_gana">Gana</string>
+    <string name="text_dashakoot_attr_yoni">Yoni</string>
+    <string name="text_dashakoot_attr_rashi">Rashi</string>
+    <string name="text_dashakoot_attr_rajju">Rajju</string>
+    <string name="text_dashakoot_attr_rasyadhipati">Rasyadhipati</string>
+    <string name="text_dashakoot_attr_vedha">Vedha</string>
+    <string name="text_dashakoot_attr_vashya">Vashya</string>
+    <string name="text_dashakoot_attr_mahendra">Mahendra</string>
+    <string name="text_dashakoot_attr_streedargha">Streedargha</string>
+
+    <string name="text_total_title">Total</string>
+    <string name="text_received_title">Received</string>
+
+    <!--Astrology Details Screen -->
+    <string name="text_manglik_analysis_title">Manglik Analysis</string>
+    <string name="text_manglik_analysis_desc">In the horoscope of boy or girl, the presence of mars, sun, saturn, Rahu, Ketu in the first
+fourth, seventh, eighth or twelveth house is believed to create a condition known as “Manglik Dosha.”\n\n\n
+
+The strength of Manglik dosh is considered
+more significant when Mars is positioned in
+the ascendant, compared to when it is co-
+joined with the Moon in the ascendant. If,
+according to the Shastras (ancient texts),
+the Manglik dosh is nullified for both the boy
+and the girl, they are believed to be destined
+for a happy and harmonious married life.
+However, if the Manglik dosh remains
+uncancelled, it is thought to lead to unnecessary problems and obstacles in
+their lives. Therefore, it is advisable for
+individuals to have their horoscopes
+thoroughly matched before embarking on
+married life. By properly nullifying the
+Manglik dosh, one can expect a life filled
+with peace and prosperity.</string>
+
+    <string name="text_nadi_dosha_title">Nadi Dosha</string>
+    <string name="text_bhakoot_dosha_title">Bhakoota Dosha</string>
+
+    <string name="text_astro_attr_col2_varna">Varna</string>
+    <string name="text_astro_attr_col2_vashya">Vashya</string>
+    <string name="text_astro_attr_col2_yoni">Yoni</string>
+    <string name="text_astro_attr_col2_gan">Gan</string>
+    <string name="text_astro_attr_col2_nadi">Nadi</string>
+    <string name="text_astro_attr_col2_signlord">Sign Lord</string>
+    <string name="text_astro_attr_col2_nakshatra">Nakshatra</string>
+    <string name="text_astro_attr_col2_nakshatralord">Nakshatra Lord</string>
+    <string name="text_astro_attr_col2_charan">Charan</string>
+    <string name="text_astro_attr_col2_tatva">Tatva</string>
+    <string name="text_astro_attr_col2_namealphabet">Name Alphabet</string>
+    <string name="text_astro_attr_col2_paya">Paya</string>
+
+
+    <!--Upload KYC Screen -->
+    <string name="text_uploadkyc_title">Upload KYC</string>
+    <string name="text_uploadkyc_choosedoctype">Choose Document Type</string>
+    <string name="text_uploadkyc_aadharcard">Aadhar Card</string>
+    <string name="text_uploadkyc_pancard">Pan Card</string>
+    <string name="text_uploadkyc_drivinglicense">Driving License</string>
+    <string name="text_uploadkyc_uploadphoto">Upload Photo</string>
+    <string name="text_uploadkyc_front">Front</string>
+    <string name="text_uploadkyc_back">Back</string>
+    <string name="dialog_log_out_title">Log out</string>
+    <string name="dialog_log_out_desc">Do you want to log out?</string>
+    <string name="text_yes">Yes</string>
+    <string name="text_no">No</string>
+    <string name="text_sent_interest_success_msg">Your interest is sent successfully.</string>
+    <string name="text_shortlist_profile_success_msg">Profile is shortlisted successfully.</string>
+    <string name="text_block_profile_success_msg">Profile is blocked successfully.</string>
+    <string name="text_unblock_profile_success_msg">Profile is unblocked successfully.</string>
+    <string name="text_decline_interest_success_msg">Interest is declined successfully.</string>
+    <string name="text_uploadkyc_warning">Please select document type.</string>
+
+    <!--Upload Photo -->
+    <string name="text_add_photo">Add Photo</string>
+    <string name="text_gallery_status_profilephoto">Profile Photo</string>
+    <string name="text_gallery_status_inreview">In Review</string>
+    <string name="text_gallery_status_approved">Approved</string>
+    <string name="dialog_set_profile_desc">Do you want to set this as profile photo?</string>
+    <string name="dialog_delete_photo_title">Delete photo?</string>
+    <string name="dialog_delete_photo_desc">Do you want to delete this photo?</string>
+
+    <!--Bottom dialog for choose image -->
+    <string name="dialog_text_title">Choose Image from </string>
+    <string name="dialog_text_camera">Camera</string>
+    <string name="dialog_text_gallery">Gallery</string>
+    <string name="dialog_text_cancel">Cancel</string>
+    <string name="hint_type_here">Type your message…</string>
+    <string name="text_chat_hello">Hello</string>
+    <string name="dialog_chat_login_error_message">Something went wrong while login though chat, Please try after sometime</string>
+
+    <!-- Request To Delete Data Screen -->
+    <string name="text_requesttodeletedata_selectreason">Select Your Reason</string>
+    <string name="text_requesttodeletedata_selectreason_desc">Please give more details on why you want to delete your data … (Optional)</string>
+    <string name="dialog_requesttodeletedata_title">Alert</string>
+    <string name="dialog_requesttodeletedata_desc">We have taken your request to delete the data, it will take 48 hours to delete your data. Thank You</string>
+    <string name="error_text_requesttodeletedata_selectreason">Please Select Your Reason</string>
+    <string name="text_success">Success</string>
+    <string name="dialog_ticket_success_message">Your ticket has been created successfully</string>
+    <string name="dialog_edit_profile_success_message">Your details have been saved successfully</string>
+
+    <string name="text_permission_granted">Required Permission Granted !!</string>
+    <string name="text_permission_required_title">Permissions Required</string>
+    <string name="text_permission_required_message">Permissions should be granted  for chat to work efficiently on Companion Platform, Please grant the permissions</string>
+    <string name="text_settings_title">Settings</string>
+    <string name="text_block_user">Block User</string>
+    <string name="text_un_block_user">Unblock User</string>
+    <string name="text_decline_interest">Decline Interest</string>
+    <string name="dialog_block_user_title">Block User</string>
+    <string name="dialog_block_user_desc">Are you sure to block the user?</string>
+    <string name="dialog_unblock_user_title">Unblock User</string>
+    <string name="dialog_unblock_user_desc">Are you sure to unblock the user?</string>
+    <string name="dialog_decline_interest_title">Decline Interest</string>
+    <string name="dialog_decline_interest_desc">Are you sure to decline the interest?</string>
+    <string name="text_back">Back</string>
+    <string name="text_edit">Edit</string>
+    <string name="text_edit_profile">Edit Profile</string>
+    <string name="text_more">More</string>
+    <string name="text_send">Send</string>
+    <string name="text_otp_digit">OTP Digit</string>
+    <string name="text_chat_message_box">Chat Message Box</string>
+    <string name="text_message_list">Message List</string>
+    <string name="text_status_active">Active</string>
+    <string name="text_profile_plan_type">Plan Type: </string>
+    <string name="text_profile_plan_expires">Expires: </string>
+    <string name="text_profile_plan_purchase">(Purchase Plans Below)</string>
+
+    <!--Purchase Plan Dialog-->
+    <string name="text_iap_resubscribe_title">Resubscribe</string>
+    <string name="text_iap_resubscribe_desc">Do you want to resubscribe this plan?</string>
+
+    <string name="text_iap_upgrade_title">Upgrade</string>
+    <string name="text_iap_upgrade_desc">Do you want to upgrade the plan?</string>
+
+    <string name="text_iap_downgrade_title">Downgrade</string>
+    <string name="text_iap_downgrade_desc">Do you want to downgrade the plan?</string>
+
+    <string name="facebook_app_id">1159403055708776</string>
+    <string name="facebook_client_token">8cc7b589fbad5dde11c0888c3c22502e</string>
+
+    <string name="agora_app_id">20f50a15f38d4b00a9b9af3d9fa8056b</string>
+<!--    <string name="agora_app_id">4e60c79a10ff4506bd47a7e582f795df</string>-->
+
+</resources>

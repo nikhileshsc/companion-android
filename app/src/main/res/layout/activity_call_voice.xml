@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootVoice"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:fitsSystemWindows="true">
+
+    <!-- Centered avatar + info -->
+    <LinearLayout
+        android:id="@+id/centerInfo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="28dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/controlsVoice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/peerAvatar"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:src="@drawable/ic_avatar_placeholder"
+            android:scaleType="centerCrop"
+            android:background="@drawable/bg_avatar_ring"
+            android:padding="4dp"
+            android:contentDescription="@string/app_name"
+            android:clipToOutline="true" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="14dp" />
+
+        <TextView
+            android:id="@+id/peerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Peer Name"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.02"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="8dp" />
+
+        <TextView
+            android:id="@+id/callTimerOrState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ringing…"
+            android:textColor="#E6FFFFFF"
+            android:textSize="13sp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:background="@drawable/bg_state_chip" />
+    </LinearLayout>
+
+    <!-- Controls -->
+    <include
+        android:id="@+id/controlsVoice"
+        layout="@layout/layout_controls_voice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

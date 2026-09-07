@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.otp.ui.request.RequestOtpActivity">
+
+    <ImageView
+        android:layout_width="@dimen/_160sdp"
+        android:layout_height="@dimen/_160sdp"
+        android:src="@drawable/companion_login_logo_white"
+        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintBottom_toTopOf="@id/layoutPhoneNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/layoutPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/_16sdp"
+        android:paddingEnd="@dimen/_16sdp"
+        android:visibility="visible"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tvPhoneNumberTitle"
+            style="@style/TextFontPoppinsSemiBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="@string/text_login_enter_phone_number"
+            android:textColor="@color/colorTitle"
+            android:gravity="center"
+            android:textSize="@dimen/_18sdp"
+             />
+
+        <TextView
+            android:id="@+id/tvPhoneNumberDesc"
+            style="@style/TextFontPoppinsRegular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="center"
+            android:text="@string/text_login_please_enter_phone_number"
+            android:textColor="@color/colorDesc"
+            android:textSize="@dimen/_14sdp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:background="@drawable/bg_rounded_outline">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/dropdownCountry"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_46sdp"
+                android:spinnerMode="dropdown"
+                android:overlapAnchor="false"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:background="@drawable/bg_rounded_corners"
+            android:gravity="center"
+            android:visibility="gone"
+            android:padding="@dimen/_8sdp">
+
+            <ImageView
+                android:id="@+id/ivEmail"
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:src="@drawable/ic_request_email"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+
+
+            <EditText
+                android:id="@+id/etEmail"
+                style="@style/TextFontPoppinsRegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:hint="@string/hint_email_address"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/_6sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llMobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:background="@drawable/bg_rounded_corners"
+            android:gravity="center"
+            android:padding="@dimen/_8sdp">
+
+            <TextView
+                android:id="@+id/tvCountryCode"
+                style="@style/TextFontPoppinsRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:text="+91"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp" />
+
+            <View
+                android:id="@+id/viewVerticalLine"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:background="@color/colorVerticalLine" />
+
+            <EditText
+                android:id="@+id/etMobileNumber"
+                style="@style/TextFontPoppinsRegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:background="@android:color/transparent"
+                android:ems="10"
+                android:hint="@string/hint_mobile_number"
+                android:inputType="number"
+                android:maxLength="10"
+                android:padding="@dimen/_6sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12sdp" />
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRequestOtp"
+            style="@style/TextFontPoppinsMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:backgroundTint="@color/colorPrimary"
+            android:padding="@dimen/_12sdp"
+            android:text="@string/btn_request_otp"
+            android:textAllCaps="false"
+            android:textSize="@dimen/_12sdp"
+            app:cornerRadius="@dimen/_20sdp" />
+
+<!--
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvRequestOnWhatsapp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:text="@string/text_label_request_otp_on_whatsapp"
+                android:textColor="@color/colorTitle"
+                android:textSize="@dimen/_10sdp" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:src="@drawable/ic_whatsapp" />
+        </LinearLayout>
+-->
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
