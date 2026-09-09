@@ -9,6 +9,8 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.util.AttributeSet
 import android.util.Log
@@ -51,6 +53,23 @@ class OnlineUsersActivity : BaseActivity() {
 
     private val viewModel: OnlineUsersViewModel by viewModels()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    // Safety net: guarantees getOnlineUsers() eventually fires even if location
+    // resolution stalls or dead-ends (GPS off, permission edge cases, no last-known
+    // location, etc.) - several of those paths previously just returned without
+    // ever calling the API, leaving the screen stuck loading indefinitely.
+    private var hasFetchedOnlineUsers = false
+    private val locationTimeoutHandler = Handler(Looper.getMainLooper())
+    private val locationTimeoutRunnable = Runnable {
+        fetchOnlineUsersOnce(0.0, 0.0)
+    }
+
+    private fun fetchOnlineUsersOnce(lat: Double, lng: Double) {
+        if (hasFetchedOnlineUsers) return
+        hasFetchedOnlineUsers = true
+        locationTimeoutHandler.removeCallbacks(locationTimeoutRunnable)
+        viewModel.getOnlineUsers(1, 20, lat, lng)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -134,6 +153,15 @@ class OnlineUsersActivity : BaseActivity() {
     }
 
     private fun requestLocationAndFetchUsers(activity: Activity,REQUEST_CHECK_SETTINGS: Int) {
+        // Guarantees the screen never hangs indefinitely: if location can't be
+        // resolved through any path below within 8s (GPS off, permission denied,
+        // no last-known location, settings check inconclusive, etc.), fall back
+        // to fetching online users with default coordinates rather than leaving
+        // the user stuck on a loading state forever.
+        hasFetchedOnlineUsers = false
+        locationTimeoutHandler.removeCallbacks(locationTimeoutRunnable)
+        locationTimeoutHandler.postDelayed(locationTimeoutRunnable, 8000L)
+
         if (!isLocationEnabled()) {
             val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 10000L)
                 .setMinUpdateIntervalMillis(5000L)
@@ -194,7 +222,7 @@ class OnlineUsersActivity : BaseActivity() {
                 val lat = location.latitude
                 val lng = location.longitude
                 Log.d("Location", "Lat: $lat, Lng: $lng")
-                viewModel.getOnlineUsers(1, 20, lat, lng)
+                fetchOnlineUsersOnce(lat, lng)
             } else {
                 // No current location available, try last known location as fallback
                 fetchLastKnownLocation()
@@ -213,7 +241,7 @@ class OnlineUsersActivity : BaseActivity() {
                     val lat = lastLocation.latitude
                     val lng = lastLocation.longitude
                     Log.d("Location", "Fallback LastLocation: $lat, $lng")
-                    viewModel.getOnlineUsers(1, 20, lat, lng)
+                    fetchOnlineUsersOnce(lat, lng)
                 } else {
                     Toast.makeText(
                         this,
@@ -265,5 +293,9 @@ class OnlineUsersActivity : BaseActivity() {
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        locationTimeoutHandler.removeCallbacks(locationTimeoutRunnable)
+    }
 
 }
