@@ -59,6 +59,7 @@ import com.companion.astrodating.util.TIME_ZONE
 import com.companion.astrodating.util.USER_1
 import com.companion.astrodating.util.USER_2
 import com.companion.astrodating.util.USER_ID
+import com.companion.astrodating.util.AUTO_UNLOCK_COMPATIBILITY
 import com.companion.astrodating.util.UpdateBenefitsConstant
 import com.companion.astrodating.util.clearCache
 import com.companion.astrodating.util.facebookLogEvent
@@ -389,8 +390,12 @@ class ProfileDetailsActivity : BaseActivity(), View.OnClickListener {
                         binding.tvInterestDesc.text = secondaryUserDetails?.interest
                         binding.tvExpectationDesc.text = secondaryUserDetails?.expectations
                         userStatus = secondaryUserDetails?.userStatus!!
-                        binding.tvGalleryCount.text =
+                                             binding.tvGalleryCount.text =
                             secondaryUserDetails?.approvedPhotosCount.toString()
+
+                        if (intent.getBooleanExtra(AUTO_UNLOCK_COMPATIBILITY, false)) {
+                            binding.clUnlockCompleteAnalysis.performClick()
+                        }
                     }
 
                 }
