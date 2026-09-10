@@ -49,6 +49,7 @@ import com.companion.astrodating.ui.intro.SplashActivity
 import com.companion.astrodating.ui.notification.ui.NotificationActivity
 import com.companion.astrodating.ui.onlineusers.ui.OnlineUsersActivity
 import com.companion.astrodating.ui.profileDetails.ui.ProfileDetailsActivity
+import com.companion.astrodating.util.AUTO_UNLOCK_COMPATIBILITY
 import com.companion.astrodating.ui.policy.PrivacyPolicyActivity
 import com.companion.astrodating.di.NetworkModule
 import android.net.Uri
@@ -497,6 +498,12 @@ class HomeFragment : Fragment() {
             }
         }
         homeUsersAdapter.onCompatibilityReportClicked = {
+            requireActivity().launchScreen<ProfileDetailsActivity> {
+                putExtra(USER_ID, it.id)
+                putExtra(AUTO_UNLOCK_COMPATIBILITY, true)
+            }
+        }
+        homeUsersAdapter.onCompatibilityReportClicked = {
             // Reuses the exact same premium-gated Ashtakoot Milan flow already
             // built and tested in ProfileDetailsActivity - no new benefit-check
             // logic duplicated here.
@@ -511,6 +518,9 @@ class HomeFragment : Fragment() {
             intent.putExtra(PrivacyPolicyActivity.PRIVACY_POLICY_URL, horoscopeUrl)
             intent.putExtra(PrivacyPolicyActivity.WEBVIEW_TITLE, "Today's Horoscope")
             startActivity(intent)
+        }
+        binding.cardOnlineUsers.setOnClickListener {
+            requireActivity().launchScreen<OnlineUsersActivity>()
         }
         binding.ivNotification.setOnClickListener {
             requireActivity().launchScreen<NotificationActivity>()
