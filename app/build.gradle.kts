@@ -24,18 +24,23 @@ android {
             useSupportLibrary = true
         }
     }
-    signingConfigs{
+       signingConfigs{
         create("release"){
-            storeFile = file("/Users/sumitkamble/Companion/companion_jks.jks")
-            storePassword = "companion@1006"
-            keyAlias = "Companion"
-            keyPassword = "companion@1006"
+            val releaseKeystorePath = System.getenv("RELEASE_KEYSTORE_PATH")
+            if (releaseKeystorePath != null) {
+                storeFile = file(releaseKeystorePath)
+                storePassword = System.getenv("RELEASE_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("RELEASE_KEY_ALIAS")
+                keyPassword = System.getenv("RELEASE_KEY_PASSWORD")
+            }
         }
     }
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
+            if (System.getenv("RELEASE_KEYSTORE_PATH") != null) {
+                signingConfig = signingConfigs.getByName("release")
+            }
             isMinifyEnabled = true
             isShrinkResources = true
             isDebuggable = false
