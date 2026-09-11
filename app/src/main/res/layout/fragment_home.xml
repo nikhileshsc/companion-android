@@ -108,22 +108,6 @@
             app:layout_constraintTop_toTopOf="@id/cardSearchView"
             app:iconTint="@null" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/tvOnline"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="@dimen/_4sdp"-->
-<!--            android:background="@drawable/bg_label_white"-->
-<!--            android:gravity="center"-->
-<!--            android:paddingHorizontal="@dimen/_6sdp"-->
-<!--            android:paddingVertical="@dimen/_2sdp"-->
-<!--            android:text=" Online "-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="@dimen/_8sdp"-->
-<!--            app:layout_constraintEnd_toEndOf="@id/btnGlobe"-->
-<!--            app:layout_constraintStart_toStartOf="@id/btnGlobe"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/btnGlobe" />-->
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/ivFilter"
             app:cornerRadius="8dp"
@@ -147,22 +131,6 @@
             app:layout_constraintTop_toTopOf="@id/btnGlobe"
             app:iconTint="@null" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/tvFilter"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="@dimen/_4sdp"-->
-<!--            android:background="@drawable/bg_label_white"-->
-<!--            android:gravity="center"-->
-<!--            android:paddingHorizontal="@dimen/_6sdp"-->
-<!--            android:paddingVertical="@dimen/_2sdp"-->
-<!--            android:text="   Filter   "-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="@dimen/_8sdp"-->
-<!--            app:layout_constraintEnd_toEndOf="@id/ivFilter"-->
-<!--            app:layout_constraintStart_toStartOf="@id/ivFilter"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/ivFilter" />-->
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/ivNotification"
             app:cornerRadius="8dp"
@@ -184,22 +152,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/cardSearchView"
             app:iconTint="@null" />
-
-<!--        <TextView-->
-<!--            android:id="@+id/tvNotification"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="@dimen/_4sdp"-->
-<!--            android:background="@drawable/bg_label_white"-->
-<!--            android:gravity="center"-->
-<!--            android:paddingHorizontal="@dimen/_6sdp"-->
-<!--            android:paddingVertical="@dimen/_2sdp"-->
-<!--            android:text=" Notific "-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="@dimen/_8sdp"-->
-<!--            app:layout_constraintEnd_toEndOf="@id/ivNotification"-->
-<!--            app:layout_constraintStart_toStartOf="@id/ivNotification"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/ivNotification" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -233,13 +185,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_8sdp"
-            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
             android:foreground="?attr/selectableItemBackground"
             app:cardBackgroundColor="#F1EEFB"
             app:cardCornerRadius="@dimen/_12sdp"
             app:cardElevation="0dp"
             app:strokeWidth="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/cardOnlineUsers"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -293,6 +245,79 @@
                     android:layout_height="@dimen/_16sdp"
                     android:src="@drawable/ic_home_search_cancel"
                     app:tint="#6C6489"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Online Users teaser -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardOnlineUsers"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="#E7F6EF"
+            app:cardCornerRadius="@dimen/_12sdp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_12sdp">
+
+                <ImageView
+                    android:id="@+id/ivOnlineUsersIcon"
+                    android:layout_width="@dimen/_32sdp"
+                    android:layout_height="@dimen/_32sdp"
+                    android:background="@drawable/bg_label_white"
+                    android:padding="@dimen/_6sdp"
+                    android:src="@drawable/ic_status_verified"
+                    app:tint="#27AE60"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvOnlineUsersTitle"
+                    style="@style/TextFontPoppinsBold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="Online Users"
+                    android:textColor="#1E4632"
+                    android:textSize="@dimen/_12sdp"
+                    app:layout_constraintEnd_toStartOf="@id/ivOnlineUsersChevron"
+                    app:layout_constraintStart_toEndOf="@id/ivOnlineUsersIcon"
+                    app:layout_constraintTop_toTopOf="@id/ivOnlineUsersIcon" />
+
+                <TextView
+                    android:id="@+id/tvOnlineUsersSubtitle"
+                    style="@style/TextFontSofiaProRegular"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:text="See who's online now"
+                    android:textColor="#4C7D68"
+                    android:textSize="@dimen/_9sdp"
+                    app:layout_constraintEnd_toStartOf="@id/ivOnlineUsersChevron"
+                    app:layout_constraintStart_toEndOf="@id/ivOnlineUsersIcon"
+                    app:layout_constraintTop_toBottomOf="@id/tvOnlineUsersTitle" />
+
+                <ImageView
+                    android:id="@+id/ivOnlineUsersChevron"
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:src="@drawable/ic_home_search_cancel"
+                    app:tint="#4C7D68"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
