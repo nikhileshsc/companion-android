@@ -14,10 +14,11 @@ class messageLimitRepoImpl @Inject constructor(
     private val api: CompanionApi,
     private val mapper: freeMessageMapper
     ) : freeMessageLimitRepository {
-    override suspend fun checkfreemessagelimit(
+      override suspend fun checkfreemessagelimit(
+        token: String,
         requestData: messageLimitRequestData
     ): ApiResult<freeMessageDomain> {
-        var result = api.checkFreeMessages(requestData)
+        var result = api.checkFreeMessages(token, requestData)
         return if (result.isSuccessful) {
             ApiResult.Success(mapper.mapToDomainModel(result.body()!!))
         } else {
