@@ -511,12 +511,12 @@ class HomeFragment : Fragment() {
                 putExtra(USER_ID, it.id)
             }
         }
-        binding.cardTodaysHoroscope.setOnClickListener {
+              binding.cardTodaysHoroscope.setOnClickListener {
             val baseUrl = NetworkModule.BASE_URL.trimEnd('/')
-            val horoscopeUrl = "$baseUrl/webviews/horoscope.html?token=${Uri.encode(authToken)}"
+            val panchangUrl = "$baseUrl/webviews/panchang.html?token=${Uri.encode(authToken)}"
             val intent = Intent(requireActivity(), PrivacyPolicyActivity::class.java)
-            intent.putExtra(PrivacyPolicyActivity.PRIVACY_POLICY_URL, horoscopeUrl)
-            intent.putExtra(PrivacyPolicyActivity.WEBVIEW_TITLE, "Today's Horoscope")
+            intent.putExtra(PrivacyPolicyActivity.PRIVACY_POLICY_URL, panchangUrl)
+            intent.putExtra(PrivacyPolicyActivity.WEBVIEW_TITLE, "Today's Panchang")
             startActivity(intent)
         }
         binding.cardOnlineUsers.setOnClickListener {
