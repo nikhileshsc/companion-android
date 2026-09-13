@@ -8,6 +8,7 @@ import com.companion.astrodating.ui.chat.domain.model.sendMessagePushNotificatio
 
 interface freeMessageLimitRepository {
         suspend fun checkfreemessagelimit(
+            token: String,
             requestData: messageLimitRequestData
         ): ApiResult<freeMessageDomain>
 
