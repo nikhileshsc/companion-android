@@ -133,7 +133,8 @@ class ChatViewModel @Inject constructor(
 //            _checkMessageLimitState.value = UiState.Loading
             try {
 //                val request = FreeMessageLimitRequest(receiverId) // Use correct request model here
-                when (val result = chatRepository.checkfreemessagelimit(
+                              when (val result = chatRepository.checkfreemessagelimit(
+                    authToken,
                     messageLimitRequestData(senderId,receiverId)
                 )) {
                     is ApiResult.Error -> {
