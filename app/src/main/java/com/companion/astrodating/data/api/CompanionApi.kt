@@ -239,6 +239,7 @@ interface CompanionApi {
 
     @POST("api/app/v1/user/checkAndIncrementMessage")
     suspend fun checkFreeMessages(
+        @Header("authorization") token: String,
         @Body body: messageLimitRequestData
     ): Response<messageLimitDto>
 
