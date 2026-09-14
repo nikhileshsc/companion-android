@@ -494,13 +494,7 @@ class HomeFragment : Fragment() {
                 putExtra(USER_ID, it.id)
             }
         }
-        homeUsersAdapter.onCompatibilityReportClicked = {
-            requireActivity().launchScreen<ProfileDetailsActivity> {
-                putExtra(USER_ID, it.id)
-                putExtra(AUTO_UNLOCK_COMPATIBILITY, true)
-            }
-        }
-           homeUsersAdapter.onCompatibilityReportClicked = {
+         homeUsersAdapter.onCompatibilityReportClicked = {
             requireActivity().launchScreen<ProfileDetailsActivity> {
                 putExtra(USER_ID, it.id)
                 putExtra(AUTO_UNLOCK_COMPATIBILITY, true)
