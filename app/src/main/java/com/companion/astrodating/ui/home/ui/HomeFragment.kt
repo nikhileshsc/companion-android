@@ -50,9 +50,6 @@ import com.companion.astrodating.ui.notification.ui.NotificationActivity
 import com.companion.astrodating.ui.onlineusers.ui.OnlineUsersActivity
 import com.companion.astrodating.ui.profileDetails.ui.ProfileDetailsActivity
 import com.companion.astrodating.util.AUTO_UNLOCK_COMPATIBILITY
-import com.companion.astrodating.ui.policy.PrivacyPolicyActivity
-import com.companion.astrodating.di.NetworkModule
-import android.net.Uri
 import com.companion.astrodating.ui.purchasePlans.data.requestData.UpdateBenefitRequestData
 import com.companion.astrodating.ui.purchasePlans.ui.PurchasePlansActivity
 import com.companion.astrodating.ui.purchasePlans.viewmodel.UpdateBenefitsDetailsViewModel
@@ -503,21 +500,11 @@ class HomeFragment : Fragment() {
                 putExtra(AUTO_UNLOCK_COMPATIBILITY, true)
             }
         }
-        homeUsersAdapter.onCompatibilityReportClicked = {
-            // Reuses the exact same premium-gated Ashtakoot Milan flow already
-            // built and tested in ProfileDetailsActivity - no new benefit-check
-            // logic duplicated here.
+           homeUsersAdapter.onCompatibilityReportClicked = {
             requireActivity().launchScreen<ProfileDetailsActivity> {
                 putExtra(USER_ID, it.id)
+                putExtra(AUTO_UNLOCK_COMPATIBILITY, true)
             }
-        }
-              binding.cardTodaysHoroscope.setOnClickListener {
-            val baseUrl = NetworkModule.BASE_URL.trimEnd('/')
-            val panchangUrl = "$baseUrl/webviews/panchang.html?token=${Uri.encode(authToken)}"
-            val intent = Intent(requireActivity(), PrivacyPolicyActivity::class.java)
-            intent.putExtra(PrivacyPolicyActivity.PRIVACY_POLICY_URL, panchangUrl)
-            intent.putExtra(PrivacyPolicyActivity.WEBVIEW_TITLE, "Today's Panchang")
-            startActivity(intent)
         }
         binding.cardOnlineUsers.setOnClickListener {
             requireActivity().launchScreen<OnlineUsersActivity>()
