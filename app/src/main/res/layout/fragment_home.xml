@@ -169,7 +169,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:paddingHorizontal="@dimen/_8sdp"
-            app:layout_constraintBottom_toTopOf="@id/cardTodaysHoroscope"
+            app:layout_constraintBottom_toTopOf="@id/cardOnlineUsers"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -178,79 +178,6 @@
             tools:listitem="@layout/row_item_home"
             tools:orientation="vertical"
             tools:scrollbars="vertical" />
-
-        <!-- Today's Horoscope teaser -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardTodaysHoroscope"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_8sdp"
-            android:layout_marginBottom="@dimen/_6sdp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="#F1EEFB"
-            app:cardCornerRadius="@dimen/_12sdp"
-            app:cardElevation="0dp"
-            app:strokeWidth="0dp"
-            app:layout_constraintBottom_toTopOf="@id/cardOnlineUsers"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/_12sdp">
-
-                <ImageView
-                    android:id="@+id/ivHoroscopeIcon"
-                    android:layout_width="@dimen/_32sdp"
-                    android:layout_height="@dimen/_32sdp"
-                    android:background="@drawable/bg_label_white"
-                    android:padding="@dimen/_6sdp"
-                    android:src="@drawable/ic_home_notification"
-                    app:tint="#F5A623"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvHoroscopeTitle"
-                    style="@style/TextFontPoppinsBold"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:text="Today's Horoscope"
-                    android:textColor="#2B2050"
-                    android:textSize="@dimen/_12sdp"
-                    app:layout_constraintEnd_toStartOf="@id/ivHoroscopeChevron"
-                    app:layout_constraintStart_toEndOf="@id/ivHoroscopeIcon"
-                    app:layout_constraintTop_toTopOf="@id/ivHoroscopeIcon" />
-
-                <TextView
-                    android:id="@+id/tvHoroscopeSubtitle"
-                    style="@style/TextFontSofiaProRegular"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:text="See what the stars have in store for you today."
-                    android:textColor="#6C6489"
-                    android:textSize="@dimen/_9sdp"
-                    app:layout_constraintEnd_toStartOf="@id/ivHoroscopeChevron"
-                    app:layout_constraintStart_toEndOf="@id/ivHoroscopeIcon"
-                    app:layout_constraintTop_toBottomOf="@id/tvHoroscopeTitle" />
-
-                <ImageView
-                    android:id="@+id/ivHoroscopeChevron"
-                    android:layout_width="@dimen/_16sdp"
-                    android:layout_height="@dimen/_16sdp"
-                    android:src="@drawable/ic_home_search_cancel"
-                    app:tint="#6C6489"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
 
         <!-- Online Users teaser -->
         <com.google.android.material.card.MaterialCardView
