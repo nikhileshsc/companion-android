@@ -386,8 +386,8 @@ class MandatoryDetailsFragment : Fragment(), View.OnClickListener,
                     Place.Field.ID, Place.Field.NAME,
                     Place.Field.ADDRESS, Place.Field.LAT_LNG
                 )
-                val intent = Autocomplete.IntentBuilder(
-                    AutocompleteActivityMode.FULLSCREEN,
+                               val intent = Autocomplete.IntentBuilder(
+                    AutocompleteActivityMode.OVERLAY,
                     placeFields
                 ).setTypeFilter(TypeFilter.CITIES).build(requireContext())
 
@@ -400,8 +400,8 @@ class MandatoryDetailsFragment : Fragment(), View.OnClickListener,
                     Place.Field.ID, Place.Field.NAME,
                     Place.Field.ADDRESS, Place.Field.LAT_LNG
                 )
-                val intent = Autocomplete.IntentBuilder(
-                    AutocompleteActivityMode.FULLSCREEN,
+                              val intent = Autocomplete.IntentBuilder(
+                    AutocompleteActivityMode.OVERLAY,
                     placeFields
                 ).setTypeFilter(TypeFilter.CITIES)
                     .build(requireContext())
