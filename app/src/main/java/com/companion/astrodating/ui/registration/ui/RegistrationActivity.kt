@@ -303,8 +303,8 @@ class RegistrationActivity : BaseActivity(), View.OnClickListener,
                     Place.Field.ID, Place.Field.NAME,
                     Place.Field.ADDRESS, Place.Field.LAT_LNG
                 )
-                val intent = Autocomplete.IntentBuilder(
-                    AutocompleteActivityMode.FULLSCREEN,
+                             val intent = Autocomplete.IntentBuilder(
+                    AutocompleteActivityMode.OVERLAY,
                     placeFields
                 ).setTypeFilter(TypeFilter.CITIES).build(this)
 
@@ -317,10 +317,10 @@ class RegistrationActivity : BaseActivity(), View.OnClickListener,
                     Place.Field.ID, Place.Field.NAME,
                     Place.Field.ADDRESS, Place.Field.LAT_LNG
                 )
-                val intent = Autocomplete.IntentBuilder(
-                    AutocompleteActivityMode.FULLSCREEN,
+                              val intent = Autocomplete.IntentBuilder(
+                    AutocompleteActivityMode.OVERLAY,
                     placeFields
-                ).build(this)
+                ).setTypeFilter(TypeFilter.CITIES).build(this)
 
                 currentCityAutocomplete.launch(intent)
             }
