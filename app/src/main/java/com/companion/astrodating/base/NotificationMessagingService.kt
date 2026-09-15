@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.companion.astrodating.R
 import com.companion.astrodating.ui.call.ui.IncomingCallActivity
+import com.companion.astrodating.util.NotificationTypeConstants
 import com.companion.astrodating.util.TAG
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -95,6 +96,24 @@ class NotificationMessagingService : FirebaseMessagingService(){
 //        if (notificationData.type == "received-interest") {
             sentNotification()
 //        }
+
+        // In addition to the system-tray notification above, also surface an
+        // in-app pop-up + bottom-nav badge for interest events when the app is
+        // in the foreground.
+        if (notificationData.type == NotificationTypeConstants.receivedInterest ||
+            notificationData.type == NotificationTypeConstants.declineInterest
+        ) {
+            if (notificationData.type == NotificationTypeConstants.receivedInterest) {
+                InAppEventBus.incrementInterestBadge()
+            }
+            InAppEventBus.postAlert(
+                InAppAlertEvent(
+                    type = notificationData.type,
+                    title = notificationData.title,
+                    body = notificationData.body
+                )
+            )
+        }
 //        if (remoteMessage.data.size > 0) {
 //            val f = remoteMessage.data["f"]
 //            val t = remoteMessage.data["t"]
