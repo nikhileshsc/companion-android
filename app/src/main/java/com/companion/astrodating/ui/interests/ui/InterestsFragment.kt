@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.companion.astrodating.R
+import com.companion.astrodating.base.InAppEventBus
 import com.companion.astrodating.databinding.FragmentInterestsBinding
 import com.companion.astrodating.ui.home.domain.model.InterestsList
 import com.companion.astrodating.ui.interests.adapter.InterestsAdapter
@@ -42,6 +43,14 @@ class InterestsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerViewsAndAdapters()
     }
+
+    override fun onResume() {
+        super.onResume()
+        // Opening the Interests tab counts as reading the received interests -
+        // clear the bottom-nav badge.
+        InAppEventBus.resetInterestBadge()
+    }
+
     private fun initRecyclerViewsAndAdapters() {
         binding.layoutToolbar.ivToolbarBack.showVisibility()
         binding.layoutToolbar.ivTitleLogo.showVisibility()
