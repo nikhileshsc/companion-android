@@ -11,6 +11,8 @@ import android.graphics.Color
 import android.graphics.Rect
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -36,6 +38,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.companion.astrodating.R
 import com.companion.astrodating.base.CallNotifHealth
 import com.companion.astrodating.base.CallNotifications
+import com.companion.astrodating.base.InAppAlertEvent
+import com.companion.astrodating.base.InAppEventBus
 import com.companion.astrodating.databinding.FragmentHomeBinding
 import com.companion.astrodating.ui.chat.ChatActivity
 import com.companion.astrodating.ui.filter.ui.FilterActivity
@@ -156,6 +160,18 @@ class HomeFragment : Fragment() {
     var minAge: Int = 18
     var maxAge: Int = 100
 
+    // -1 means "not measured yet" so the very first check never fires a
+    // false "new message" popup before we know the real baseline.
+    private var previousUnreadCount = -1
+    private val unreadPollHandler = Handler(Looper.getMainLooper())
+    private val UNREAD_POLL_INTERVAL_MS = 5000L
+    private val unreadPollRunnable = object : Runnable {
+        override fun run() {
+            refreshUnreadMessages(fireAlertOnIncrease = true)
+            unreadPollHandler.postDelayed(this, UNREAD_POLL_INTERVAL_MS)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (authToken.isNotEmpty()) {
@@ -270,7 +286,15 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun fetchAndUpdateUnreadBadge() {
+    /**
+     * Recomputes the total unread message count from Agora Chat and updates
+     * the Message bottom-nav badge. When [fireAlertOnIncrease] is true and the
+     * count has gone up since the last check, also surfaces an in-app
+     * "You have a new message!" pop-up. Pass false right after login/first
+     * load so we don't pop an alert for messages that were already unread
+     * before this session started.
+     */
+    private fun refreshUnreadMessages(fireAlertOnIncrease: Boolean) {
         try {
             val chatClient = ChatClient.getInstance()
 
@@ -283,16 +307,33 @@ class HomeFragment : Fragment() {
             val chatManager = chatClient.chatManager()
             val conversations = chatManager.allConversations
 
-            // Calculate total unread count
+            // Calculate total unread count, and remember which conversation
+            // most recently had unread messages (for the pop-up body text).
             var totalUnreadCount = 0
-            for ((_, conversation) in conversations) {
+            var latestConversationId: String? = null
+            for ((conversationId, conversation) in conversations) {
                 totalUnreadCount += conversation.unreadMsgCount
+                if (conversation.unreadMsgCount > 0) {
+                    latestConversationId = conversationId
+                }
             }
 
             Log.d(TAG, "✅ Total unread messages: $totalUnreadCount from ${conversations.size} conversations")
 
             // Update bottom nav badge
             updateBottomNavUnreadBadge(totalUnreadCount)
+
+            if (fireAlertOnIncrease && previousUnreadCount in 0 until totalUnreadCount) {
+                InAppEventBus.postAlert(
+                    InAppAlertEvent(
+                        type = InAppEventBus.TYPE_CHAT_MESSAGE,
+                        title = "You have a new message!",
+                        body = latestConversationId?.let { "New message from $it" }
+                            ?: "You have a new message"
+                    )
+                )
+            }
+            previousUnreadCount = totalUnreadCount
 
         } catch (e: Exception) {
             Log.e(TAG, "❌ Error fetching unread badge: ${e.message}", e)
@@ -418,8 +459,9 @@ class HomeFragment : Fragment() {
                 override fun onSuccess() {
                     Log.e(AGORA_TAG, "onChatLoginSuccess")
                     initAgoraPushNotification()
-                    // Fetch unread badge immediately after login
-                    fetchAndUpdateUnreadBadge()
+                    // Establish the unread-count baseline immediately after
+                    // login (no alert - these messages were already unread).
+                    refreshUnreadMessages(fireAlertOnIncrease = false)
                 }
 
                 override fun onError(code: Int, error: String) {
@@ -1134,6 +1176,12 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         Log.d(TAG, "HomeFragment onResume: Refreshing unread badge")
-        fetchAndUpdateUnreadBadge()
+        unreadPollHandler.removeCallbacks(unreadPollRunnable)
+        unreadPollHandler.post(unreadPollRunnable)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unreadPollHandler.removeCallbacks(unreadPollRunnable)
     }
 }

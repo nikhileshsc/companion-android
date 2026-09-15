@@ -5,11 +5,15 @@ import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.companion.astrodating.R
 import com.companion.astrodating.base.BaseActivity
+import com.companion.astrodating.base.InAppAlertManager
+import com.companion.astrodating.base.InAppEventBus
 import com.companion.astrodating.databinding.ActivityHomePageBinding
 import com.companion.astrodating.ui.home.domain.model.InterestDomain
 import com.companion.astrodating.ui.interests.ui.InterestsFragment
@@ -64,6 +68,7 @@ class HomePageActivity : BaseActivity() {
 //        enableEdgeToEdge()
         loadingDialog = LoadingDialog(this)
         setupNavigationComponents()
+        setupInAppAlerts()
         getIntentData()
         googlePlayPurchaseReconciler.reconcile()
     }
@@ -164,6 +169,59 @@ class HomePageActivity : BaseActivity() {
                     }
                     // Handle other fragments as needed
                 }
+            }
+        }
+    }
+
+    /**
+     * Shows a transient in-app alert card (new message / new interest) while
+     * this activity is on screen, and keeps the Interests bottom-nav badge
+     * in sync with InAppEventBus.
+     */
+    private fun setupInAppAlerts() {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.inAppAlertContainer) { v, insets ->
+            val topInset = insets.getInsets(WindowInsetsCompat.Type.systemBars()).top
+            v.setPadding(v.paddingLeft, topInset, v.paddingRight, v.paddingBottom)
+            insets
+        }
+
+        InAppEventBus.alertEvent.observe(this) { event ->
+            event ?: return@observe
+
+            val iconRes = when (event.type) {
+                NotificationTypeConstants.receivedInterest -> R.drawable.ic_interest_receivedinterest
+                NotificationTypeConstants.declineInterest -> R.drawable.ic_interest_declined
+                else -> R.drawable.ic_interest_receivedinterest
+            }
+
+            InAppAlertManager.show(
+                container = binding.inAppAlertContainer,
+                title = event.title,
+                body = event.body,
+                iconRes = iconRes
+            ) {
+                when (event.type) {
+                    NotificationTypeConstants.receivedInterest,
+                    NotificationTypeConstants.declineInterest -> {
+                        binding.bottomNavigationView.selectedItemId = R.id.interestsFragment
+                    }
+                    InAppEventBus.TYPE_CHAT_MESSAGE -> {
+                        binding.bottomNavigationView.selectedItemId = R.id.messageFragment
+                    }
+                }
+            }
+
+            InAppEventBus.consumeAlert()
+        }
+
+        InAppEventBus.interestBadgeCount.observe(this) { count ->
+            val badgeCount = count ?: 0
+            if (badgeCount > 0) {
+                val badge = binding.bottomNavigationView.getOrCreateBadge(R.id.interestsFragment)
+                badge.isVisible = true
+                badge.number = badgeCount
+            } else {
+                binding.bottomNavigationView.removeBadge(R.id.interestsFragment)
             }
         }
     }
