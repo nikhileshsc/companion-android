@@ -6,71 +6,85 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="12dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="8dp"
-    app:cardBackgroundColor="@color/white">
+    app:cardCornerRadius="20dp"
+    app:cardElevation="10dp"
+    app:cardBackgroundColor="@color/white"
+    app:strokeColor="@color/colorPrimary"
+    app:strokeWidth="1dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
         android:padding="12dp">
 
         <FrameLayout
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/bg_circle_primary">
+            android:id="@+id/iconContainer"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_circle_primary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
                 android:id="@+id/ivAlertIcon"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_interest_receivedinterest"
                 app:tint="@color/white" />
         </FrameLayout>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvAlertTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginStart="12dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvAlertTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textColor="@color/colorTitle"
-                android:textSize="14sp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                tools:text="You received an interest!" />
-
-            <TextView
-                android:id="@+id/tvAlertBody"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:textColor="@color/colorDesc"
-                android:textSize="12sp"
-                android:maxLines="2"
-                android:ellipsize="end"
-                tools:text="Alexandra: Hi! Loved your profile..." />
-        </LinearLayout>
+            android:textStyle="bold"
+            android:textColor="@color/colorTitle"
+            android:textSize="14sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintTop_toTopOf="@id/iconContainer"
+            app:layout_constraintStart_toEndOf="@id/iconContainer"
+            app:layout_constraintEnd_toStartOf="@id/tvAlertTime"
+            tools:text="You received an interest!" />
 
         <TextView
-            android:id="@+id/tvAlertClose"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="4dp"
-            android:gravity="center"
-            android:text="✕"
+            android:id="@+id/tvAlertTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="Now"
             android:textColor="@color/colorDesc"
-            android:textSize="14sp" />
+            android:textSize="10sp"
+            app:layout_constraintTop_toTopOf="@id/tvAlertTitle"
+            app:layout_constraintBottom_toBottomOf="@id/tvAlertTitle"
+            app:layout_constraintEnd_toStartOf="@id/ivAlertChevron" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tvAlertBody"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/colorDesc"
+            android:textSize="12sp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@id/tvAlertTitle"
+            app:layout_constraintStart_toStartOf="@id/tvAlertTitle"
+            app:layout_constraintEnd_toStartOf="@id/ivAlertChevron"
+            tools:text="Alexandra: Hi! Loved your profile..." />
+
+        <ImageView
+            android:id="@+id/ivAlertChevron"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_right_arrow"
+            app:tint="@color/colorDesc"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
