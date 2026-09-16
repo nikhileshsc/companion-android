@@ -14,6 +14,7 @@ import com.companion.astrodating.R
 import com.companion.astrodating.base.BaseActivity
 import com.companion.astrodating.base.InAppAlertManager
 import com.companion.astrodating.base.InAppEventBus
+import com.companion.astrodating.base.InAppAlertEvent
 import com.companion.astrodating.databinding.ActivityHomePageBinding
 import com.companion.astrodating.ui.chat.ChatActivity
 import com.companion.astrodating.ui.home.domain.model.InterestDomain
