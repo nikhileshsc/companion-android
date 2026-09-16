@@ -308,7 +308,7 @@ class HomeFragment : Fragment() {
             val conversations = chatManager.allConversations
 
             // Calculate total unread count, and remember which conversation
-            // most recently had unread messages (for the pop-up body text).
+            // most recently had unread messages (for the pop-up).
             var totalUnreadCount = 0
             var latestConversationId: String? = null
             for ((conversationId, conversation) in conversations) {
@@ -323,21 +323,61 @@ class HomeFragment : Fragment() {
             // Update bottom nav badge
             updateBottomNavUnreadBadge(totalUnreadCount)
 
-            if (fireAlertOnIncrease && previousUnreadCount in 0 until totalUnreadCount) {
-                InAppEventBus.postAlert(
-                    InAppAlertEvent(
-                        type = InAppEventBus.TYPE_CHAT_MESSAGE,
-                        title = "You have a new message!",
-                        body = latestConversationId?.let { "New message from $it" }
-                            ?: "You have a new message"
-                    )
-                )
+            if (fireAlertOnIncrease && previousUnreadCount in 0 until totalUnreadCount && latestConversationId != null) {
+                postNewMessageAlert(latestConversationId, conversations[latestConversationId])
             }
             previousUnreadCount = totalUnreadCount
 
         } catch (e: Exception) {
             Log.e(TAG, "❌ Error fetching unread badge: ${e.message}", e)
         }
+    }
+
+    /**
+     * Resolves the sender's nickname (same lookup MessageFragment uses to
+     * populate the Message list) and posts an in-app alert carrying the
+     * conversation id, so tapping it can open that exact chat.
+     */
+    private fun postNewMessageAlert(conversationId: String, conversation: Conversation?) {
+        val lastMessageText = try {
+            (conversation?.lastMessage?.body as? io.agora.chat.TextMessageBody)?.message
+        } catch (e: Exception) {
+            null
+        } ?: "You have a new message"
+
+        agoraChatClient.userInfoManager().fetchUserInfoByUserId(
+            arrayOf(conversationId),
+            object : ValueCallBack<Map<String?, io.agora.chat.UserInfo?>?> {
+                override fun onSuccess(result: Map<String?, io.agora.chat.UserInfo?>?) {
+                    val userInfo = result?.get(conversationId)
+                    val senderName = userInfo?.nickname?.takeIf { it.isNotBlank() } ?: conversationId
+                    InAppEventBus.postAlert(
+                        InAppAlertEvent(
+                            type = InAppEventBus.TYPE_CHAT_MESSAGE,
+                            title = "You have a new message!",
+                            body = "$senderName: $lastMessageText",
+                            conversationId = conversationId,
+                            senderName = senderName,
+                            senderAvatarUrl = userInfo?.avatarUrl
+                        )
+                    )
+                }
+
+                override fun onError(code: Int, error: String?) {
+                    // Still post the alert so the user isn't left with a stale
+                    // badge and no explanation - just without a resolved nickname.
+                    InAppEventBus.postAlert(
+                        InAppAlertEvent(
+                            type = InAppEventBus.TYPE_CHAT_MESSAGE,
+                            title = "You have a new message!",
+                            body = "$conversationId: $lastMessageText",
+                            conversationId = conversationId,
+                            senderName = conversationId
+                        )
+                    )
+                }
+            }
+        )
     }
 
     private fun updateBottomNavUnreadBadge(unreadCount: Int) {

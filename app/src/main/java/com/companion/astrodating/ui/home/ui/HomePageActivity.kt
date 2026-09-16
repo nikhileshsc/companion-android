@@ -15,20 +15,29 @@ import com.companion.astrodating.base.BaseActivity
 import com.companion.astrodating.base.InAppAlertManager
 import com.companion.astrodating.base.InAppEventBus
 import com.companion.astrodating.databinding.ActivityHomePageBinding
+import com.companion.astrodating.ui.chat.ChatActivity
 import com.companion.astrodating.ui.home.domain.model.InterestDomain
 import com.companion.astrodating.ui.interests.ui.InterestsFragment
 import com.companion.astrodating.ui.intro.SplashActivity
 import com.companion.astrodating.ui.managePhotos.ui.ManagePhotosActivity
+import com.companion.astrodating.ui.message.viewmodel.MessageViewModel
 import com.companion.astrodating.ui.profile.ui.ProfileFragment
 import com.companion.astrodating.ui.profile.viewmodel.ProfileViewModel
 import com.companion.astrodating.ui.purchasePlans.GooglePlayPurchaseReconciler
+import com.companion.astrodating.ui.purchasePlans.data.requestData.UpdateBenefitRequestData
+import com.companion.astrodating.ui.states.MessageUiState
 import com.companion.astrodating.ui.states.UiState
 import com.companion.astrodating.util.APP_EMPTY_STRING
 import com.companion.astrodating.util.ERROR_CODE_LOGOUT
 import com.companion.astrodating.util.InterestTypeConstant
 import com.companion.astrodating.util.LoadingDialog
 import com.companion.astrodating.util.NotificationTypeConstants
+import com.companion.astrodating.util.SEC_USER_FULL_NAME
+import com.companion.astrodating.util.SEC_USER_ID
+import com.companion.astrodating.util.SEC_USER_PROFILE
+import com.companion.astrodating.util.StorePreferences
 import com.companion.astrodating.util.TAG
+import com.companion.astrodating.util.UpdateBenefitsConstant
 import com.companion.astrodating.util.clearCache
 import com.companion.astrodating.util.isInternetConnection
 import com.companion.astrodating.util.launchScreen
@@ -56,6 +65,7 @@ class HomePageActivity : BaseActivity() {
     private lateinit var navHostController: NavController
     private lateinit var appUpdateManager: AppUpdateManager
     private val profileViewModel: ProfileViewModel by viewModels()
+    private val messageViewModel: MessageViewModel by viewModels()
     private lateinit var loadingDialog: LoadingDialog
     var notificationBody = APP_EMPTY_STRING
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -176,7 +186,9 @@ class HomePageActivity : BaseActivity() {
     /**
      * Shows a transient in-app alert card (new message / new interest) while
      * this activity is on screen, and keeps the Interests bottom-nav badge
-     * in sync with InAppEventBus.
+     * in sync with InAppEventBus. Alerts are queued one at a time - tapping
+     * the current one dismisses it, runs its deep link, and advances to the
+     * next queued alert (if any).
      */
     private fun setupInAppAlerts() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.inAppAlertContainer) { v, insets ->
@@ -185,7 +197,7 @@ class HomePageActivity : BaseActivity() {
             insets
         }
 
-        InAppEventBus.alertEvent.observe(this) { event ->
+        InAppEventBus.currentAlert.observe(this) { event ->
             event ?: return@observe
 
             val iconRes = when (event.type) {
@@ -200,18 +212,11 @@ class HomePageActivity : BaseActivity() {
                 body = event.body,
                 iconRes = iconRes
             ) {
-                when (event.type) {
-                    NotificationTypeConstants.receivedInterest,
-                    NotificationTypeConstants.declineInterest -> {
-                        binding.bottomNavigationView.selectedItemId = R.id.interestsFragment
-                    }
-                    InAppEventBus.TYPE_CHAT_MESSAGE -> {
-                        binding.bottomNavigationView.selectedItemId = R.id.messageFragment
-                    }
-                }
+                handleAlertTap(event)
+                // Dismiss already happened (InAppAlertManager does this on
+                // click); advance() shows the next queued alert, if any.
+                InAppEventBus.advance()
             }
-
-            InAppEventBus.consumeAlert()
         }
 
         InAppEventBus.interestBadgeCount.observe(this) { count ->
@@ -222,6 +227,108 @@ class HomePageActivity : BaseActivity() {
                 badge.number = badgeCount
             } else {
                 binding.bottomNavigationView.removeBadge(R.id.interestsFragment)
+            }
+        }
+
+        observeChatUnlock()
+    }
+
+    /**
+     * Runs the deep link for a tapped alert: opens the exact chat with the
+     * sender for a message alert, or the actual received/declined interests
+     * list (not just the Interests tab landing screen) for an interest alert.
+     */
+    private fun handleAlertTap(event: InAppAlertEvent) {
+        when (event.type) {
+            NotificationTypeConstants.receivedInterest, NotificationTypeConstants.declineInterest -> {
+                val interestDomain = if (event.type == NotificationTypeConstants.receivedInterest) {
+                    InterestDomain(
+                        image = R.drawable.ic_interest_receivedinterest,
+                        title = R.string.text_interest_receivedinterest,
+                        interestType = InterestTypeConstant.receivedInterest
+                    )
+                } else {
+                    InterestDomain(
+                        image = R.drawable.ic_interest_declined,
+                        title = R.string.text_interest_declinedlist,
+                        interestType = InterestTypeConstant.declineInterest
+                    )
+                }
+                val bundle = Bundle()
+                bundle.putString(InterestTypeConstant.interestData, Gson().toJson(interestDomain))
+                binding.bottomNavigationView.selectedItemId = R.id.interestsFragment
+                navHostController.navigate(R.id.interestUserFragment, bundle)
+            }
+
+            InAppEventBus.TYPE_CHAT_MESSAGE -> {
+                val conversationId = event.conversationId ?: return
+                binding.bottomNavigationView.selectedItemId = R.id.messageFragment
+                openChatWith(conversationId, event.senderName ?: conversationId, event.senderAvatarUrl ?: "")
+            }
+        }
+    }
+
+    /**
+     * Same "check chat credit, then open ChatActivity" flow MessageFragment
+     * uses for a tap in the Message list - reused here so opening a chat
+     * from the pop-up behaves identically (paywall / free-chat handling
+     * included) instead of bypassing that check.
+     */
+    private fun openChatWith(userId: String, userName: String, profileUrl: String) {
+        val authToken = StorePreferences.getAuthToken().orEmpty()
+        if (!isInternetConnection()) {
+            binding.root.showLongDurationSnackBar(resources.getString(R.string.text_no_internet_connection))
+            return
+        }
+        messageViewModel.updateBenefitByType(
+            authToken,
+            UpdateBenefitRequestData(UpdateBenefitsConstant.chatProfiles, userId),
+            userId,
+            userName,
+            profileUrl
+        )
+    }
+
+    private fun observeChatUnlock() {
+        messageViewModel.state.observe(this) { state ->
+            when (state) {
+                is MessageUiState.Success -> {
+                    launchScreen<ChatActivity> {
+                        putExtra(SEC_USER_ID, messageViewModel.userId)
+                        putExtra(SEC_USER_FULL_NAME, messageViewModel.userName)
+                        putExtra(SEC_USER_PROFILE, messageViewModel.profileUrl)
+                    }
+                    messageViewModel.resetState()
+                }
+
+                is MessageUiState.Error -> {
+                    when (state.errorCode) {
+                        403 -> {
+                            launchScreen<ChatActivity> {
+                                putExtra(SEC_USER_ID, messageViewModel.userId)
+                                putExtra(SEC_USER_FULL_NAME, messageViewModel.userName)
+                                putExtra(SEC_USER_PROFILE, messageViewModel.profileUrl)
+                                putExtra("isFreeUser", true)
+                            }
+                            messageViewModel.resetState()
+                        }
+                        402 -> {
+                            launchScreen<ChatActivity> {
+                                putExtra(SEC_USER_ID, messageViewModel.userId)
+                                putExtra(SEC_USER_FULL_NAME, messageViewModel.userName)
+                                putExtra(SEC_USER_PROFILE, messageViewModel.profileUrl)
+                                putExtra("isFreeUser", false)
+                            }
+                            messageViewModel.resetState()
+                        }
+                        else -> {
+                            showErrorDialog(state.error + "")
+                            messageViewModel.resetState()
+                        }
+                    }
+                }
+
+                else -> {}
             }
         }
     }
