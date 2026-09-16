@@ -2,25 +2,21 @@ package com.companion.astrodating.base
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.companion.astrodating.databinding.ViewInAppAlertBinding
 
 /**
- * Shows a small, auto-dismissing card at the top of the screen when a new
- * message or interest arrives while the app is in the foreground - e.g.
- * "You received an interest!" / "You have a new message!".
+ * Shows a card at the top of the screen when a new message or interest
+ * arrives while the app is in the foreground - e.g. "You received an
+ * interest!" / "You have a new message!". The card stays on screen until
+ * the user taps it (which both dismisses it and runs [onClick], typically
+ * navigating to the relevant tab) - there is no auto-dismiss timer.
  */
 object InAppAlertManager {
 
-    private const val AUTO_DISMISS_MS = 4500L
-
     private var currentAlertView: View? = null
-    private val handler = Handler(Looper.getMainLooper())
-    private var dismissRunnable: Runnable? = null
 
     fun show(
         container: ViewGroup,
@@ -43,9 +39,6 @@ object InAppAlertManager {
             onClick?.invoke()
             dismiss(container)
         }
-        binding.tvAlertClose.setOnClickListener {
-            dismiss(container)
-        }
 
         container.addView(binding.root)
         currentAlertView = binding.root
@@ -55,15 +48,9 @@ object InAppAlertManager {
             .translationY(0f)
             .setDuration(250)
             .start()
-
-        dismissRunnable = Runnable { dismiss(container) }
-        handler.postDelayed(dismissRunnable!!, AUTO_DISMISS_MS)
     }
 
     fun dismiss(container: ViewGroup) {
-        dismissRunnable?.let { handler.removeCallbacks(it) }
-        dismissRunnable = null
-
         val view = currentAlertView ?: return
         currentAlertView = null
 
