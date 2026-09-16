@@ -20,21 +20,32 @@ view binding, Agora Chat SDK types already referenced elsewhere).
 - `app/src/main/res/layout/activity_home_page.xml`
 
 ## What this does
-1. **In-app pop-up card** — `InAppAlertManager` shows a dismissible card at
-   the top of the screen (auto-dismisses after ~4.5s, tap to jump to the
-   relevant tab) whenever an event is posted to `InAppEventBus`.
-2. **Interests received/declined** — `NotificationMessagingService` now
+1. **In-app pop-up card, queued** — `InAppAlertManager` shows a card at the
+   top of the screen (icon circle, bold title + "Now" timestamp, subtitle,
+   chevron arrow). It has **no auto-dismiss timer** — it stays until tapped.
+   If a new message/interest arrives while a card is already showing,
+   `InAppEventBus` queues it (FIFO) instead of dropping it or replacing the
+   card - the next one shows automatically once the current one is tapped.
+2. **Tapping a message alert opens that exact chat.** `HomeFragment`
+   resolves the sender's nickname via Agora's `userInfoManager()` (the same
+   lookup `MessageFragment` uses) and carries the conversation id on the
+   event. Tapping the card runs the same "check chat credit → launch
+   ChatActivity" flow as `MessageFragment` (via `MessageViewModel`,
+   including the 403/402 free-chat/paywall handling), then opens the
+   specific sender's `ChatActivity` — not just the Message tab.
+3. **Tapping an interest alert opens the actual received/declined list** —
+   navigates straight to `interestUserFragment` filtered by type (the same
+   destination the old cold-start notification-tap path already used), not
+   just the Interests tab's category screen.
+4. **Interests received/declined** — `NotificationMessagingService` now
    posts to `InAppEventBus` (in addition to the existing system-tray
    notification) whenever a `received-interest` / `decline-interest` FCM
    push arrives, and increments the Interests badge.
-3. **Interests badge** — new live badge on the Interests bottom-nav tab,
-   cleared automatically when the user opens that tab
-   (`InterestsFragment.onResume()`).
-4. **Live message badge + pop-up** — `HomeFragment` already computed the
-   Message badge from Agora unread counts on `onResume`/login; it now also
-   polls every 5 seconds while the Home tab is visible, so the badge and a
-   "You have a new message!" pop-up update without needing to leave and
-   re-enter the tab.
+5. **Interests badge** — live badge on the Interests bottom-nav tab, cleared
+   automatically when the user opens that tab (`InterestsFragment.onResume()`).
+6. **Live message badge + pop-up** — `HomeFragment` polls Agora unread
+   counts every 5 seconds while the Home tab is visible, so the badge and
+   pop-up update without needing to leave and re-enter the tab.
 
 ## Known scope limits (be aware)
 - The live "new message" pop-up currently only refreshes while the **Home**
