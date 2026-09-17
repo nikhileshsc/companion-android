@@ -151,6 +151,7 @@ object NotificationTypeConstants{
     const val gallery = "gallery"
     const val subscription = "subscription"
     const val server = "server"
+    const val chatMessage = "chat"
 }
 object RegexConstants{
     val nickNameRegex = "[a-zA-Z' ]+"
