@@ -164,7 +164,11 @@ class HomeFragment : Fragment() {
     // false "new message" popup before we know the real baseline.
     private var previousUnreadCount = -1
     private val unreadPollHandler = Handler(Looper.getMainLooper())
-    private val UNREAD_POLL_INTERVAL_MS = 5000L
+    // Backed off from 5s to 15s: this shares the single Agora ChatClient
+    // connection with ChatActivity, and polling too aggressively risks
+    // contending with ChatActivity's own history fetch right when a chat is
+    // opened, which can show up as "chat is slow to load".
+    private val UNREAD_POLL_INTERVAL_MS = 15000L
     private val unreadPollRunnable = object : Runnable {
         override fun run() {
             refreshUnreadMessages(fireAlertOnIncrease = true)
