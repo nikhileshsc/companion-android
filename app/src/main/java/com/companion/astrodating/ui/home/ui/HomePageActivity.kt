@@ -169,6 +169,27 @@ class HomePageActivity : BaseActivity() {
                         }
                     }
 
+                    NotificationTypeConstants.chatMessage -> {
+                        // App was killed/backgrounded and the user tapped the
+                        // chat push notification. Land on Home and queue the
+                        // same in-app alert card shown when the app is
+                        // already open, so tapping it opens the exact chat.
+                        binding.bottomNavigationView.selectedItemId = R.id.homeFragment
+                        val senderId = intent?.getStringExtra("senderId")
+                        if (!senderId.isNullOrEmpty()) {
+                            InAppEventBus.postAlert(
+                                InAppAlertEvent(
+                                    type = InAppEventBus.TYPE_CHAT_MESSAGE,
+                                    title = intent?.getStringExtra("title") ?: "You have a new message!",
+                                    body = intent?.getStringExtra("body") ?: "",
+                                    conversationId = senderId,
+                                    senderName = intent?.getStringExtra("senderName"),
+                                    senderAvatarUrl = intent?.getStringExtra("profileUrl")
+                                )
+                            )
+                        }
+                    }
+
                     ProfileFragment::class.java.name -> launchScreen<ManagePhotosActivity>()
                     NotificationTypeConstants.deleteMyAccount ->{
                         notificationBody = intent?.getStringExtra("body")!!
