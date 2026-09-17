@@ -98,21 +98,33 @@ class NotificationMessagingService : FirebaseMessagingService(){
 //        }
 
         // In addition to the system-tray notification above, also surface an
-        // in-app pop-up + bottom-nav badge for interest events when the app is
-        // in the foreground.
-        if (notificationData.type == NotificationTypeConstants.receivedInterest ||
-            notificationData.type == NotificationTypeConstants.declineInterest
-        ) {
-            if (notificationData.type == NotificationTypeConstants.receivedInterest) {
-                InAppEventBus.incrementInterestBadge()
-            }
-            InAppEventBus.postAlert(
-                InAppAlertEvent(
-                    type = notificationData.type,
-                    title = notificationData.title,
-                    body = notificationData.body
+        // in-app pop-up + bottom-nav badge while the app is in the foreground.
+        when (notificationData.type) {
+            NotificationTypeConstants.receivedInterest, NotificationTypeConstants.declineInterest -> {
+                if (notificationData.type == NotificationTypeConstants.receivedInterest) {
+                    InAppEventBus.incrementInterestBadge()
+                }
+                InAppEventBus.postAlert(
+                    InAppAlertEvent(
+                        type = notificationData.type,
+                        title = notificationData.title,
+                        body = notificationData.body
+                    )
                 )
-            )
+            }
+
+            NotificationTypeConstants.chatMessage -> {
+                InAppEventBus.postAlert(
+                    InAppAlertEvent(
+                        type = InAppEventBus.TYPE_CHAT_MESSAGE,
+                        title = notificationData.title,
+                        body = notificationData.body,
+                        conversationId = notificationData.senderId,
+                        senderName = notificationData.senderName,
+                        senderAvatarUrl = notificationData.profileUrl
+                    )
+                )
+            }
         }
 //        if (remoteMessage.data.size > 0) {
 //            val f = remoteMessage.data["f"]
