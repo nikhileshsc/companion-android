@@ -67,6 +67,24 @@ class NotificationBuilder(
 
             }
 
+            NotificationTypeConstants.chatMessage -> {
+                // Lands on Home (matching the in-app popup's own destination)
+                // with the sender id/name/title/body carried through so
+                // HomePageActivity can queue the same in-app alert card it
+                // shows when the app is already open - see
+                // setupNavigationComponents().
+                intent = Intent(context, HomePageActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    putExtra("targetFragment", NotificationTypeConstants.chatMessage)
+                    putExtra(NotificationTypeConstants.type, NotificationTypeConstants.chatMessage)
+                    putExtra("senderId", notificationData.senderId)
+                    putExtra("senderName", notificationData.senderName)
+                    putExtra("profileUrl", notificationData.profileUrl)
+                    putExtra("title", notificationData.title)
+                    putExtra("body", notificationData.body)
+                }
+            }
+
             NotificationTypeConstants.photoApproved,
             NotificationTypeConstants.photoRejected -> {
                 val targetFragment = ProfileFragment::class.java.name
