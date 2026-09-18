@@ -30,12 +30,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.companion.astrodating.R
 import com.companion.astrodating.base.CallNotifHealth
 import com.companion.astrodating.base.CallNotifications
+import com.companion.astrodating.data.api.CompanionApi
 import com.companion.astrodating.databinding.FragmentHomeBinding
 import com.companion.astrodating.ui.chat.ChatActivity
 import com.companion.astrodating.ui.filter.ui.FilterActivity
@@ -101,10 +103,16 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.agora.CallBack
 import io.agora.chat.ChatClient
 import io.agora.chat.ChatOptions
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.Calendar
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
+
+    @Inject
+    lateinit var companionApi: CompanionApi
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -262,6 +270,27 @@ class HomeFragment : Fragment() {
             if (it.isSuccessful) {
                 Log.e(TAG, "In Application generateDeviceToken function in success of token -> ${it.result}")
                 agoraChatClient.sendFCMTokenToServer(it.result)
+
+                // Also keep our own backend's loginToken.deviceToken in sync
+                // as a safety net for already-installed users, whose token
+                // won't necessarily rotate right away after updating to a
+                // build with the onNewToken() fix - see
+                // NotificationMessagingService.onNewToken() for the primary
+                // fix. Cheap and idempotent, so firing it on every chat
+                // login is fine.
+                val fcmToken = it.result
+                if (authToken.isNotEmpty() && fcmToken != null) {
+                    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                        try {
+                            companionApi.updateDeviceToken(
+                                authToken,
+                                mapOf("deviceToken" to fcmToken, "deviceType" to "android")
+                            )
+                        } catch (e: Exception) {
+                            Log.e(TAG, "Failed to sync device token to backend: ${e.message}")
+                        }
+                    }
+                }
             }
         }
     }
