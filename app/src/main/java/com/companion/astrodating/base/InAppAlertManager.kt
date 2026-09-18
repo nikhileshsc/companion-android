@@ -2,9 +2,14 @@ package com.companion.astrodating.base
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.companion.astrodating.R
 import com.companion.astrodating.databinding.ViewInAppAlertBinding
 
 /**
@@ -23,14 +28,36 @@ object InAppAlertManager {
         title: String,
         body: String,
         iconRes: Int,
+        avatarUrl: String? = null,
         onClick: (() -> Unit)? = null
     ) {
         dismiss(container)
 
         val binding = ViewInAppAlertBinding.inflate(LayoutInflater.from(container.context), container, false)
-        binding.ivAlertIcon.setImageResource(iconRes)
         binding.tvAlertTitle.text = title
         binding.tvAlertBody.text = body
+
+        if (!avatarUrl.isNullOrBlank()) {
+            // Show the sender's real photo, full-bleed circular, no tint and
+            // no colored backing circle behind it.
+            binding.iconContainer.background = null
+            binding.ivAlertIcon.imageTintList = null
+            Glide.with(container.context)
+                .load(avatarUrl)
+                .transform(CircleCrop())
+                .placeholder(iconRes)
+                .error(iconRes)
+                .into(binding.ivAlertIcon)
+        } else {
+            // No avatar to show (interest alerts, or a message alert whose
+            // sender has no photo) - fall back to a tinted icon on the
+            // colored circle background.
+            binding.iconContainer.setBackgroundResource(R.drawable.bg_circle_primary)
+            binding.ivAlertIcon.imageTintList = ColorStateList.valueOf(
+                ContextCompat.getColor(container.context, R.color.white)
+            )
+            binding.ivAlertIcon.setImageResource(iconRes)
+        }
 
         binding.root.alpha = 0f
         binding.root.translationY = -40f
