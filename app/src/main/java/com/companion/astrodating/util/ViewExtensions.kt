@@ -19,6 +19,7 @@ import com.android.billingclient.api.BillingClient
 import com.companion.astrodating.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
+import io.agora.chat.ChatClient
 
 internal fun View.showVisibility() {
     this.visibility = View.VISIBLE
@@ -360,6 +361,22 @@ internal fun TextView.underline() {
 }
 
 internal fun Context.clearCache() {
+    // The Agora Chat SDK keeps its own session + locally cached conversation
+    // data independent of our SharedPreferences. If we don't explicitly log
+    // it out here, that session/cache from the account that's signing out
+    // can still be active when the next account logs into chat on the same
+    // device - which is what caused messages appearing to leak between
+    // accounts when testing with two logins on one device. unbindToken=true
+    // because the account is fully signing out, so its FCM token shouldn't
+    // stay bound to this Agora chat user either.
+    try {
+        if (ChatClient.getInstance().isLoggedInBefore) {
+            ChatClient.getInstance().logout(true, null)
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+
     this.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE).apply {
         edit().clear().apply()
     }
