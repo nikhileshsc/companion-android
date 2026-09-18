@@ -54,6 +54,7 @@
         android:background="@android:color/transparent"
         android:padding="@dimen/_8sdp"
         android:src="@drawable/ic_more_vertical"
+        android:visibility="gone"
         android:contentDescription="More options"
         app:layout_constraintBottom_toBottomOf="@id/tvTitle"
         app:layout_constraintEnd_toEndOf="parent"
