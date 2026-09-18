@@ -3,9 +3,11 @@ package com.companion.astrodating.base
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.res.ColorStateList
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -37,11 +39,15 @@ object InAppAlertManager {
         binding.tvAlertTitle.text = title
         binding.tvAlertBody.text = body
 
+        val density = container.context.resources.displayMetrics.density
+
         if (!avatarUrl.isNullOrBlank()) {
-            // Show the sender's real photo, full-bleed circular, no tint and
-            // no colored backing circle behind it.
+            // Show the sender's real photo, filling the whole 48dp circle -
+            // no tint, no colored backing circle behind it.
             binding.iconContainer.background = null
             binding.ivAlertIcon.imageTintList = null
+            val fullSize = (48 * density).toInt()
+            binding.ivAlertIcon.layoutParams = FrameLayout.LayoutParams(fullSize, fullSize)
             Glide.with(container.context)
                 .load(avatarUrl)
                 .transform(CircleCrop())
@@ -50,11 +56,15 @@ object InAppAlertManager {
                 .into(binding.ivAlertIcon)
         } else {
             // No avatar to show (interest alerts, or a message alert whose
-            // sender has no photo) - fall back to a tinted icon on the
-            // colored circle background.
+            // sender has no photo) - fall back to a small tinted icon
+            // centered on the colored circle background.
             binding.iconContainer.setBackgroundResource(R.drawable.bg_circle_primary)
             binding.ivAlertIcon.imageTintList = ColorStateList.valueOf(
                 ContextCompat.getColor(container.context, R.color.white)
+            )
+            val iconSize = (24 * density).toInt()
+            binding.ivAlertIcon.layoutParams = FrameLayout.LayoutParams(
+                iconSize, iconSize, Gravity.CENTER
             )
             binding.ivAlertIcon.setImageResource(iconRes)
         }
