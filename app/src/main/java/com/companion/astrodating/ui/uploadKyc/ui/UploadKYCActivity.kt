@@ -72,6 +72,11 @@ class UploadKYCActivity : BaseActivity(), View.OnClickListener {
 //        enableEdgeToEdge()
         initData()
         handleClickEvents()
+        // Select a document type by default so the front/back upload boxes
+        // are actionable the moment the screen opens, instead of requiring
+        // an easy-to-miss chip tap first (previously tapping the upload
+        // boxes before this just showed a brief warning snackbar).
+        onClick(binding.tvAadharCard)
     }
 
     private fun handleClickEvents() {
@@ -132,6 +137,17 @@ class UploadKYCActivity : BaseActivity(), View.OnClickListener {
                     loadingDialog.hideDialog()
                     isGetKycApiCalled = true
                     getKycDomain = it.data
+                    // The KYC details just arrived after we already
+                    // defaulted to Aadhar Card in onCreate (before the API
+                    // response existed) - re-run the same selection now so
+                    // any already-uploaded front/back images are reflected.
+                    if (selectedDocumentType.isNotEmpty()) {
+                        when (selectedDocumentType) {
+                            "AadharCard" -> onClick(binding.tvAadharCard)
+                            "PanCard" -> onClick(binding.tvPanCard)
+                            "DrivingLicense" -> onClick(binding.tvDrivingLicense)
+                        }
+                    }
                 }
             }
         }
