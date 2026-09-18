@@ -255,7 +255,8 @@ class HomePageActivity : BaseActivity() {
                 container = binding.inAppAlertContainer,
                 title = event.title,
                 body = event.body,
-                iconRes = iconRes
+                iconRes = iconRes,
+                avatarUrl = event.senderAvatarUrl
             ) {
                 handleAlertTap(event)
                 // Dismiss already happened (InAppAlertManager does this on
