@@ -51,6 +51,7 @@ import com.companion.astrodating.ui.updateProfile.ui.basicDetails.data.dto.GetMa
 import com.companion.astrodating.ui.updateProfile.ui.basicDetails.data.requestData.UpdateBasicDetailsRequestData
 import com.companion.astrodating.ui.uploadKyc.data.dto.GetKycDto
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -267,4 +268,15 @@ interface CompanionApi {
         @Header("authorization") token: String,
 //        @Body body: canSendCallDto not needed
     ): Response<canSendCallDto>
+
+    // Refreshes the FCM token stored against this user on the backend
+    // (loginToken.deviceToken) without a full re-login. See the Android
+    // FCM onNewToken() callback and the equivalent call fired after chat
+    // login, both of which call this whenever the local FCM token changes
+    // or may be out of sync with the backend.
+    @POST("api/app/v1/user/updateDeviceToken")
+    suspend fun updateDeviceToken(
+        @Header("authorization") token: String,
+        @Body body: Map<String, String>
+    ): Response<ResponseBody>
 }
