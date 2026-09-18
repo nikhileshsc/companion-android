@@ -231,9 +231,10 @@ class HomePageActivity : BaseActivity() {
     /**
      * Shows a transient in-app alert card (new message / new interest) while
      * this activity is on screen, and keeps the Interests bottom-nav badge
-     * in sync with InAppEventBus. Alerts are queued one at a time - tapping
-     * the current one dismisses it, runs its deep link, and advances to the
-     * next queued alert (if any).
+     * in sync with InAppEventBus. Alerts are queued one at a time - the
+     * queue advances to the next queued one (if any) whenever the current
+     * card is tapped OR auto-dismisses after its timeout, so a missed tap
+     * can no longer wedge the queue and silence all future alerts.
      */
     private fun setupInAppAlerts() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.inAppAlertContainer) { v, insets ->
@@ -256,13 +257,15 @@ class HomePageActivity : BaseActivity() {
                 title = event.title,
                 body = event.body,
                 iconRes = iconRes,
-                avatarUrl = event.senderAvatarUrl
-            ) {
-                handleAlertTap(event)
-                // Dismiss already happened (InAppAlertManager does this on
-                // click); advance() shows the next queued alert, if any.
-                InAppEventBus.advance()
-            }
+                avatarUrl = event.senderAvatarUrl,
+                onClick = { handleAlertTap(event) },
+                onDismissed = {
+                    // Fires exactly once per alert, whether it was tapped or
+                    // timed out - always advance so a missed tap can never
+                    // permanently stop future alerts from showing.
+                    InAppEventBus.advance()
+                }
+            )
         }
 
         InAppEventBus.interestBadgeCount.observe(this) { count ->
