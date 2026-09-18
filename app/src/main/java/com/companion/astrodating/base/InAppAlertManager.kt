@@ -3,6 +3,8 @@ package com.companion.astrodating.base
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.res.ColorStateList
+import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -17,13 +19,23 @@ import com.companion.astrodating.databinding.ViewInAppAlertBinding
 /**
  * Shows a card at the top of the screen when a new message or interest
  * arrives while the app is in the foreground - e.g. "You received an
- * interest!" / "You have a new message!". The card stays on screen until
- * the user taps it (which both dismisses it and runs [onClick], typically
- * navigating to the relevant tab) - there is no auto-dismiss timer.
+ * interest!" / "You have a new message!". The card auto-dismisses after
+ * [AUTO_DISMISS_MS] if the user doesn't tap it - previously it only
+ * dismissed on tap, which meant any other way of moving on (back press,
+ * switching bottom-nav tabs, backgrounding the app) left the alert queue
+ * permanently stuck and no further pop-ups were ever shown again for the
+ * rest of the app session. [onDismissed] now fires exactly once per alert
+ * - whether it was tapped or timed out - so the caller can reliably advance
+ * to the next queued alert either way.
  */
 object InAppAlertManager {
 
+    private const val AUTO_DISMISS_MS = 6000L
+
     private var currentAlertView: View? = null
+    private var onDismissedCallback: (() -> Unit)? = null
+    private val autoDismissHandler = Handler(Looper.getMainLooper())
+    private var autoDismissRunnable: Runnable? = null
 
     fun show(
         container: ViewGroup,
@@ -31,9 +43,12 @@ object InAppAlertManager {
         body: String,
         iconRes: Int,
         avatarUrl: String? = null,
-        onClick: (() -> Unit)? = null
+        onClick: (() -> Unit)? = null,
+        onDismissed: (() -> Unit)? = null
     ) {
         dismiss(container)
+
+        onDismissedCallback = onDismissed
 
         val binding = ViewInAppAlertBinding.inflate(LayoutInflater.from(container.context), container, false)
         binding.tvAlertTitle.text = title
@@ -85,11 +100,21 @@ object InAppAlertManager {
             .translationY(0f)
             .setDuration(250)
             .start()
+
+        val runnable = Runnable { dismiss(container) }
+        autoDismissRunnable = runnable
+        autoDismissHandler.postDelayed(runnable, AUTO_DISMISS_MS)
     }
 
     fun dismiss(container: ViewGroup) {
+        autoDismissRunnable?.let { autoDismissHandler.removeCallbacks(it) }
+        autoDismissRunnable = null
+
         val view = currentAlertView ?: return
         currentAlertView = null
+
+        val callback = onDismissedCallback
+        onDismissedCallback = null
 
         view.animate()
             .alpha(0f)
@@ -98,6 +123,7 @@ object InAppAlertManager {
             .setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     container.removeView(view)
+                    callback?.invoke()
                 }
             })
             .start()
