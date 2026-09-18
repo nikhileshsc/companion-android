@@ -10,16 +10,27 @@ import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.companion.astrodating.R
+import com.companion.astrodating.data.api.CompanionApi
 import com.companion.astrodating.ui.call.ui.IncomingCallActivity
 import com.companion.astrodating.util.NotificationTypeConstants
+import com.companion.astrodating.util.StorePreferences
 import com.companion.astrodating.util.TAG
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
 import io.agora.chat.ChatClient
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class NotificationMessagingService : FirebaseMessagingService(){
+
+    @Inject
+    lateinit var companionApi: CompanionApi
 
     private lateinit var notificationManager: NotificationManager
     private var notificationBuilder: NotificationBuilder?=null
@@ -181,6 +192,24 @@ class NotificationMessagingService : FirebaseMessagingService(){
             ChatClient.getInstance().sendFCMTokenToServer(token)
         }
 
+        // Also keep our own backend's loginToken.deviceToken in sync - Agora
+        // only needed it for its own chat push delivery, but our interest
+        // and message push notifications, in-app popups and badges all key
+        // off the copy stored on our own user record. Only fire this if the
+        // user is actually logged in (an auth token exists).
+        val authToken = StorePreferences.getAuthToken()
+        if (!authToken.isNullOrEmpty()) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    companionApi.updateDeviceToken(
+                        authToken,
+                        mapOf("deviceToken" to token, "deviceType" to "android")
+                    )
+                } catch (e: Exception) {
+                    Log.e(TAG, "Failed to sync refreshed device token to backend: ${e.message}")
+                }
+            }
+        }
     }
 
     override fun onDestroy() {
