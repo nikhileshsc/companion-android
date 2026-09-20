@@ -12,6 +12,7 @@ import com.companion.astrodating.ui.home.domain.model.GetHomeUserDomainEntity
 import com.companion.astrodating.util.formatNumber
 import com.companion.astrodating.util.hideVisibility
 import com.companion.astrodating.util.invisible
+import com.companion.astrodating.util.loadImage
 import com.companion.astrodating.util.showVisibility
 import com.google.android.material.shape.AbsoluteCornerSize
 import com.google.android.material.shape.CornerFamily
@@ -120,10 +121,7 @@ class HomeUsersAdapter() : RecyclerView.Adapter<HomeUsersAdapter.HomeUsersViewHo
         }
 
         fun bind(userDomainEntity: GetHomeUserDomainEntity) {
-            Glide.with(binding.ivProfile.context)
-                .load(userDomainEntity.profileUrl)
-                .error(R.drawable.ic_default_profile)
-                .into(binding.ivProfile)
+            binding.ivProfile.loadImage(userDomainEntity.profileUrl, sizePx = 600)
 
             if (userDomainEntity.isVerifiedAccount) {
                 binding.ivProfileStatus.showVisibility()
