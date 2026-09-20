@@ -9,6 +9,7 @@ import com.companion.astrodating.R
 import com.companion.astrodating.databinding.RowItemManagePhotoBinding
 import com.companion.astrodating.ui.managePhotos.domain.model.GetMyPhotoGalleryDomainEntity
 import com.companion.astrodating.util.hideVisibility
+import com.companion.astrodating.util.loadImage
 import com.companion.astrodating.util.showVisibility
 
 class ManagePhotosAdapter : RecyclerView.Adapter<ManagePhotosAdapter.ManagePhotosViewHolder>() {
@@ -70,8 +71,7 @@ class ManagePhotosAdapter : RecyclerView.Adapter<ManagePhotosAdapter.ManagePhoto
             }else {
                 binding.clProfileItem.showVisibility()
                 binding.clAddPhoto.hideVisibility()
-                Glide.with(binding.ivProfile.context).load(galleryDomainEntity.galleryUrl)
-                    .error(R.drawable.ic_default_profile).into(binding.ivProfile)
+                binding.ivProfile.loadImage(galleryDomainEntity.galleryUrl, sizePx = 400)
                 binding.tvProfileStatus.text = galleryDomainEntity.status
                 if (galleryDomainEntity.status == binding.tvProfileStatus.context.getString(R.string.text_gallery_status_approved)) {
                     binding.tvProfileStatus.background = ContextCompat.getDrawable(
