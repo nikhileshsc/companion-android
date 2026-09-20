@@ -2,6 +2,7 @@ package com.companion.astrodating.ui.uploadKyc.ui
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -34,6 +35,7 @@ import com.companion.astrodating.util.hideVisibility
 import com.companion.astrodating.util.invisible
 import com.companion.astrodating.util.isInternetConnection
 import com.companion.astrodating.util.launchScreenAndFinish
+import com.companion.astrodating.util.loadImage
 import com.companion.astrodating.util.showErrorDialog
 import com.companion.astrodating.util.showLoggedOutDialog
 import com.companion.astrodating.util.showShortDurationSnackBar
@@ -63,6 +65,10 @@ class UploadKYCActivity : BaseActivity(), View.OnClickListener {
     var selectedDocumentType = ""
     var selectedDocumentSide = ""
     private var imageUri: Uri? = null
+    // Tracks which picker was last used so "Retake" in the upload confirm
+    // dialog can reopen the same source (camera or gallery) the user just
+    // picked from, instead of forcing them back through the chooser sheet.
+    private var lastPickerWasCamera = true
     lateinit var bottomSheetDialog: BottomSheetDialog
     lateinit var bottomDialogChooseImageBinding: BottomDialogChooseImageBinding
     private var getKycDomain: GetKycDomain? = null
@@ -214,9 +220,7 @@ class UploadKYCActivity : BaseActivity(), View.OnClickListener {
                         if (frontUrl.isNotEmpty()) {
                             binding.clFront.invisible()
                             binding.ivFront.showVisibility()
-                            Glide.with(binding.ivFront.context).load(frontUrl)
-                                .error(R.drawable.ic_default_profile)
-                                .into(binding.ivFront)
+                            binding.ivFront.loadImage(frontUrl, sizePx = 900)
                         } else {
                             binding.clFront.showVisibility()
                             binding.ivFront.invisible()
@@ -227,9 +231,7 @@ class UploadKYCActivity : BaseActivity(), View.OnClickListener {
                         if (backUrl.isNotEmpty()) {
                             binding.clBack.invisible()
                             binding.ivBack.showVisibility()
-                            Glide.with(binding.ivBack.context).load(backUrl)
-                                .error(R.drawable.ic_default_profile)
-                                .into(binding.ivBack)
+                            binding.ivBack.loadImage(backUrl, sizePx = 900)
 
                         } else {
                             binding.clBack.showVisibility()
@@ -260,9 +262,7 @@ class UploadKYCActivity : BaseActivity(), View.OnClickListener {
                             binding.clBack.hideVisibility()
                             binding.ivBack.hideVisibility()
                             binding.ivFront.showVisibility()
-                            Glide.with(binding.ivFront.context).load(frontUrl)
-                                .error(R.drawable.ic_default_profile)
-                                .into(binding.ivFront)
+                            binding.ivFront.loadImage(frontUrl, sizePx = 900)
                         }else{
                             binding.clFront.showVisibility()
                             binding.clBack.hideVisibility()
@@ -293,9 +293,7 @@ class UploadKYCActivity : BaseActivity(), View.OnClickListener {
                             binding.clBack.hideVisibility()
                             binding.ivBack.hideVisibility()
                             binding.ivFront.showVisibility()
-                            Glide.with(binding.ivFront.context).load(frontUrl)
-                                .error(R.drawable.ic_default_profile)
-                                .into(binding.ivFront)
+                            binding.ivFront.loadImage(frontUrl, sizePx = 900)
                         }else{
                             binding.clFront.showVisibility()
                             binding.clBack.hideVisibility()
@@ -363,11 +361,13 @@ class UploadKYCActivity : BaseActivity(), View.OnClickListener {
     }
 
     private fun openCamera() {
+        lastPickerWasCamera = true
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         cameraLauncher.launch(cameraIntent)
     }
 
     private fun openGallery() {
+        lastPickerWasCamera = false
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         galleryLauncher.launch(galleryIntent)
     }
@@ -384,43 +384,71 @@ class UploadKYCActivity : BaseActivity(), View.OnClickListener {
             }
         }
 
+    /**
+     * Shows the just-picked image in the front/back ImageView and, once the
+     * size check passes, asks the user to confirm before the actual upload
+     * API call fires (previously this uploaded immediately with no preview
+     * or confirm/retake step).
+     */
     private fun validateUploadDocument(imageUri: Uri) {
         val type = "$selectedDocumentSide$selectedDocumentType".trim()
         if (selectedDocumentType == "AadharCard") {
             if (selectedDocumentSide == "frontSide") {
                 binding.clFront.invisible()
                 binding.ivFront.showVisibility()
-                if (imageUri != null && checkImageSize(imageUri)) {
-                    uploadDocument(type, "$type.png")
+                binding.ivFront.setImageURI(imageUri)
+                if (checkImageSize(imageUri)) {
+                    showUploadConfirmDialog { uploadDocument(type, "$type.png") }
                 } else {
                     showShortDurationToast("Image size exceeds 5 MB")
                 }
-                binding.ivFront.setImageURI(imageUri)
             } else if (selectedDocumentSide == "backSide") {
                 binding.clBack.invisible()
                 binding.ivBack.showVisibility()
-
-                if (imageUri != null && checkImageSize(imageUri)) {
-                    uploadDocument(type, "$type.png")
+                binding.ivBack.setImageURI(imageUri)
+                if (checkImageSize(imageUri)) {
+                    showUploadConfirmDialog { uploadDocument(type, "$type.png") }
                 } else {
                     showShortDurationToast("Image size exceeds 5 MB")
                 }
-                binding.ivBack.setImageURI(imageUri)
             }
         } else {
             binding.clFront.invisible()
             binding.clBack.hideVisibility()
             binding.ivBack.hideVisibility()
             binding.ivFront.showVisibility()
-            if (imageUri != null && checkImageSize(imageUri)) {
-                uploadDocument(type, "$type.png")
+            binding.ivFront.setImageURI(imageUri)
+            if (checkImageSize(imageUri)) {
+                showUploadConfirmDialog { uploadDocument(type, "$type.png") }
             } else {
                 showShortDurationToast("Image size exceeds 5 MB")
             }
-
-            binding.ivFront.setImageURI(imageUri)
-
         }
+    }
+
+    /**
+     * Confirm/retake gate shown after a picked photo passes the size check
+     * and before uploadDocument() is called. "Retake" dismisses this and
+     * reopens whichever picker (camera or gallery) was last used.
+     */
+    private fun showUploadConfirmDialog(onConfirmUpload: () -> Unit) {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.text_uploadkyc_uploadphoto))
+            .setMessage("Upload this photo?")
+            .setCancelable(false)
+            .setPositiveButton("Upload") { dialog, _ ->
+                dialog.dismiss()
+                onConfirmUpload()
+            }
+            .setNegativeButton("Retake") { dialog, _ ->
+                dialog.dismiss()
+                if (lastPickerWasCamera) {
+                    askCameraPermission()
+                } else {
+                    openGallery()
+                }
+            }
+            .show()
     }
 
     private val galleryLauncher =
