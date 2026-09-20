@@ -9,6 +9,7 @@ import com.companion.astrodating.databinding.RowItemTopMatchesBinding
 import com.companion.astrodating.ui.interests.domain.model.GetInterestUserDomainEntity
 import com.companion.astrodating.util.formatNumber
 import com.companion.astrodating.util.hideVisibility
+import com.companion.astrodating.util.loadImage
 import com.companion.astrodating.util.showVisibility
 
 class InterestUsersAdapter() : RecyclerView.Adapter<InterestUsersAdapter.InterestUserViewHolder>() {
@@ -48,10 +49,8 @@ class InterestUsersAdapter() : RecyclerView.Adapter<InterestUsersAdapter.Interes
         }
 
         fun bind(userDomainEntity: GetInterestUserDomainEntity) {
-            Glide.with(binding.ivUser.context).load(userDomainEntity.profileUrl)
-                .error(R.drawable.ic_default_profile).into(binding.ivUser)
-            Glide.with(binding.ivHoroscope.context).load(userDomainEntity.zodiacPngUrl)
-                .error(R.drawable.ic_default_profile).into(binding.ivHoroscope)
+            binding.ivUser.loadImage(userDomainEntity.profileUrl, sizePx = 300)
+            binding.ivHoroscope.loadImage(userDomainEntity.zodiacPngUrl, sizePx = 100)
             if (userDomainEntity.isVerifiedAccount) {
                 binding.ivStatus.showVisibility()
             } else {
