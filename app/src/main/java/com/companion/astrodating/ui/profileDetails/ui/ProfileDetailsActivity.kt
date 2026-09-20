@@ -70,6 +70,7 @@ import com.companion.astrodating.util.fromUnlockCompleteAnalysis
 import com.companion.astrodating.util.isInternetConnection
 import com.companion.astrodating.util.launchScreen
 import com.companion.astrodating.util.launchScreenAndFinish
+import com.companion.astrodating.util.loadImage
 import com.companion.astrodating.util.showCommonDialogWithButtons
 import com.companion.astrodating.util.showErrorDialog
 import com.companion.astrodating.util.showLoggedOutDialog
@@ -329,8 +330,7 @@ class ProfileDetailsActivity : BaseActivity(), View.OnClickListener {
         }
         StorePreferences.getProfileUrl()?.let {
             profileUrl = it
-            Glide.with(binding.ivUser1.context).load(profileUrl)
-                .error(R.drawable.ic_default_profile).into(binding.ivUser1)
+            binding.ivUser1.loadImage(profileUrl, sizePx = 700)
         }
         StorePreferences.getSubscriptionData().let {
             subscriptionDomain = it
@@ -376,8 +376,7 @@ class ProfileDetailsActivity : BaseActivity(), View.OnClickListener {
                         "${user2}, ${secondaryUserDetails?.age}".also {
                             binding.tvUserName.text = it
                         }
-                        Glide.with(binding.ivUser2.context).load(secondaryUserDetails?.profileUrl)
-                            .error(R.drawable.ic_default_profile).into(binding.ivUser2)
+                        binding.ivUser2.loadImage(secondaryUserDetails?.profileUrl, sizePx = 700)
                         binding.tvAboutDesc.text = secondaryUserDetails?.aboutYourself
                         binding.tvMaritalStatus.text = secondaryUserDetails?.status
                         binding.tvHeight.text = formatNumber( secondaryUserDetails?.height!!)
