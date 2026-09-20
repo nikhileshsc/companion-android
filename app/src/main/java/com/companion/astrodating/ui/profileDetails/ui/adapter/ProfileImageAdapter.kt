@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.companion.astrodating.R
 import com.companion.astrodating.databinding.LayoutImageItemBinding
 import com.companion.astrodating.ui.profileDetails.domain.model.GetUserDetailsGalleryDomain
+import com.companion.astrodating.util.loadImage
 
 class ProfileImageAdapter() : RecyclerView.Adapter<ProfileImageAdapter.ProfileImageViewHolder>() {
 
@@ -38,8 +39,7 @@ class ProfileImageAdapter() : RecyclerView.Adapter<ProfileImageAdapter.ProfileIm
 
 
         fun bind(galleryDomain: GetUserDetailsGalleryDomain) {
-            Glide.with(binding.ivProfile.context).load(galleryDomain.galleryUrl)
-                .error(R.drawable.ic_default_profile).into(binding.ivProfile)
+            binding.ivProfile.loadImage(galleryDomain.galleryUrl, sizePx = 900)
 
         }
     }
