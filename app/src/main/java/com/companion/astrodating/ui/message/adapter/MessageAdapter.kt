@@ -12,6 +12,7 @@ import com.companion.astrodating.databinding.RowItemMessageBinding
 import com.companion.astrodating.ui.message.domain.model.MessageInfo
 import com.companion.astrodating.util.convertMessageTimeFromLongToTime
 import com.companion.astrodating.util.hideVisibility
+import com.companion.astrodating.util.loadImage
 import com.companion.astrodating.util.showVisibility
 import java.util.Locale
 
@@ -62,10 +63,7 @@ class MessageAdapter : RecyclerView.Adapter<MessageAdapter.MessageViewHolder>(),
         }
 
         fun bind(messageInfo: MessageInfo) {
-            Glide.with(binding.ivUser.context)
-                .load(messageInfo.profileUrl)
-                .error(R.drawable.ic_default_profile)
-                .into(binding.ivUser)
+            binding.ivUser.loadImage(messageInfo.profileUrl, sizePx = 200)
 
             binding.tvUser.text = messageInfo.userName
             binding.tvUserMessage.text = messageInfo.message
