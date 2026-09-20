@@ -10,6 +10,7 @@ import com.companion.astrodating.databinding.RowItemTopMatchesBinding
 import com.companion.astrodating.ui.home.domain.model.GetHomeUserDomainEntity
 import com.companion.astrodating.util.formatNumber
 import com.companion.astrodating.util.hideVisibility
+import com.companion.astrodating.util.loadImage
 import com.companion.astrodating.util.showVisibility
 
 class TopMatchesAdapter() : RecyclerView.Adapter<TopMatchesAdapter.TopMatchesViewHolder>() {
@@ -49,10 +50,8 @@ class TopMatchesAdapter() : RecyclerView.Adapter<TopMatchesAdapter.TopMatchesVie
         }
 
         fun bind(userDomainEntity: GetHomeUserDomainEntity) {
-            Glide.with(binding.ivUser.context).load(userDomainEntity.profileUrl)
-                .error(R.drawable.ic_default_profile).into(binding.ivUser)
-            Glide.with(binding.ivHoroscope.context).load(userDomainEntity.zodiacPngUrl)
-                .error(R.drawable.ic_default_profile).into(binding.ivHoroscope)
+            binding.ivUser.loadImage(userDomainEntity.profileUrl, sizePx = 300)
+            binding.ivHoroscope.loadImage(userDomainEntity.zodiacPngUrl, sizePx = 100)
             if (userDomainEntity.isVerifiedAccount) {
                 binding.ivStatus.showVisibility()
             } else {
