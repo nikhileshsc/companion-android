@@ -5,6 +5,7 @@ import com.bumptech.glide.Glide
 import com.companion.astrodating.R
 import com.companion.astrodating.databinding.ItemLayoutMsgSenderBinding
 import com.companion.astrodating.util.convertLongToTime
+import com.companion.astrodating.util.loadImage
 import com.xwray.groupie.viewbinding.BindableItem
 
 class SenderMessageHolder(
@@ -20,8 +21,7 @@ class SenderMessageHolder(
     override fun bind(binding: ItemLayoutMsgSenderBinding, position: Int) {
             binding.tvMessageFrom.text = chatMessage
             binding.tvMessageFromTimestamp.text = convertLongToTime(chatMessageTime)
-            Glide.with(binding.ivUserRight.context).load(chatProfileUrl)
-            .error(R.drawable.ic_default_profile).into(binding.ivUserRight)
+            binding.ivUserRight.loadImage(chatProfileUrl, sizePx = 150)
     }
 
     override fun getLayout(): Int = R.layout.item_layout_msg_sender
