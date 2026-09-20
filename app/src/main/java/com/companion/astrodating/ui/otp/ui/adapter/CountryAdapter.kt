@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.companion.astrodating.R
 import com.companion.astrodating.ui.otp.domain.model.CountryDomainEntity
+import com.companion.astrodating.util.loadImage
 
 class CountryAdapter(
     mContext: Context,
@@ -32,7 +33,7 @@ class CountryAdapter(
         val ivCountryFlag: ImageView = view.findViewById(R.id.countryImage)
 
         tvCountryName.text = getItem(position)?.country
-        Glide.with(parent.context).load(getItem(position)?.iconUrl).into(ivCountryFlag)
+        ivCountryFlag.loadImage(getItem(position)?.iconUrl, sizePx = 100)
 
         return view
     }
