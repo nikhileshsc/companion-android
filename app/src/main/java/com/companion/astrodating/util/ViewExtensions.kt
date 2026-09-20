@@ -12,10 +12,13 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.core.view.WindowCompat
 import com.android.billingclient.api.BillingClient
+import com.bumptech.glide.Glide
 import com.companion.astrodating.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
@@ -57,6 +60,34 @@ internal fun Context.isInternetConnection(): Boolean {
 
 fun CharSequence?.isValidEmail() =
     !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+
+/**
+ * Centralized image loading. Every Glide call in this app previously had no
+ * placeholder (a blank/gray flash was visible until the network image
+ * finished downloading) and no target size (full-resolution originals were
+ * decoded even for small list thumbnails, adding to app-wide scroll
+ * jank/slowness). This fixes both in one place.
+ *
+ * sizePx caps the decoded bitmap's largest dimension - pass a size roughly
+ * matching the ImageView's real on-screen size (small avatars ~150-200,
+ * card-sized photos ~500-600, full detail/gallery photos ~900). Existing
+ * scaleType/transformations (centerCrop, circleCrop, etc.) on the target
+ * ImageView or an existing Glide chain are unaffected - this only adds a
+ * placeholder and caps decode size.
+ */
+fun ImageView.loadImage(
+    url: String?,
+    @DrawableRes placeholderRes: Int = R.drawable.ic_default_profile,
+    @DrawableRes errorRes: Int = placeholderRes,
+    sizePx: Int = 500
+) {
+    Glide.with(this)
+        .load(url)
+        .placeholder(placeholderRes)
+        .error(errorRes)
+        .override(sizePx, sizePx)
+        .into(this)
+}
 
 /*
 internal fun Context.showWarningDialog(
