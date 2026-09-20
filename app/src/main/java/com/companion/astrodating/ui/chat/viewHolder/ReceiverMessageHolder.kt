@@ -6,6 +6,7 @@ import com.companion.astrodating.R
 import com.companion.astrodating.databinding.ItemLayoutMsgReceiverBinding
 import com.companion.astrodating.ui.chat.OnUserPhotoClickListener
 import com.companion.astrodating.util.convertLongToTime
+import com.companion.astrodating.util.loadImage
 import com.xwray.groupie.viewbinding.BindableItem
 
 class ReceiverMessageHolder (
@@ -22,8 +23,7 @@ class ReceiverMessageHolder (
     override fun bind(binding: ItemLayoutMsgReceiverBinding, position: Int) {
         binding.tvMessageReceiver.text = chatMessage
         binding.tvMessageFromTimestamp.text = convertLongToTime(chatMessageTime)
-        Glide.with(binding.ivUser.context).load(chatProfileUrl)
-            .error(R.drawable.ic_default_profile).into(binding.ivUser)
+        binding.ivUser.loadImage(chatProfileUrl, sizePx = 150)
 
         binding.ivUser.setOnClickListener{
             onPhotoClick?.invoke(chatProfileUrl)
