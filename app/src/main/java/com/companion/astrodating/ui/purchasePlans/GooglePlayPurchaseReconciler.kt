@@ -5,6 +5,7 @@ import android.util.Log
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingResult
+import com.android.billingclient.api.PendingPurchasesParams
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.QueryPurchasesParams
 import com.companion.astrodating.data.api.CompanionApi
@@ -31,7 +32,11 @@ class GooglePlayPurchaseReconciler @Inject constructor(
         val authToken = StorePreferences.getAuthToken() ?: return
         if (!reconciling.compareAndSet(false, true)) return
         val billingClient = BillingClient.newBuilder(context)
-            .enablePendingPurchases()
+            .enablePendingPurchases(
+                PendingPurchasesParams.newBuilder()
+                    .enableOneTimeProducts()
+                    .build()
+            )
             .setListener { _, _ -> }
             .build()
         billingClient.startConnection(object : BillingClientStateListener {
