@@ -545,9 +545,10 @@ class PurchasePlansActivity : BaseActivity(), BillingClientStateListener, Purcha
             .build()
         Log.e(BILLING_CLIENT_TAG, "queryProductDetailsParam: ${queryProductDetailsParam}")
         withContext(Dispatchers.IO) {
-            billingClient?.queryProductDetailsAsync(queryProductDetailsParam) { billingResult, productDetailsList ->
+            billingClient?.queryProductDetailsAsync(queryProductDetailsParam) { billingResult, queryProductDetailsResult ->
 
                 // call api
+                val productDetailsList = queryProductDetailsResult.productDetailsList
                 Log.e(
                     BILLING_CLIENT_TAG,
                     "productDetailsList: ${productDetailsList}, size -${productDetailsList.size}, billingResult -${billingResult.responseCode}"
@@ -557,7 +558,7 @@ class PurchasePlansActivity : BaseActivity(), BillingClientStateListener, Purcha
 
                     BillingClient.BillingResponseCode.OK -> {
 
-                        if (productDetailsList?.isNotEmpty() == true) {
+                        if (productDetailsList.isNotEmpty()) {
                             for (product in productDetailsList) {
                                 if (product.subscriptionOfferDetails != null && product.subscriptionOfferDetails!!.size > 0) {
                                     for (subscriptionOfferDetails in product.subscriptionOfferDetails!!) {
