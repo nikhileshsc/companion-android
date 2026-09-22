@@ -27,7 +27,7 @@ object Versions {
     const val paging = "3.1.1"
     const val liveReactions = "1.0"
     const val pinView = "v1.5"
-    const val billingClient = "7.1.1"
+    const val billingClient = "9.1.0"
     const val appUpdate = "2.1.0"
     const val facebookSdk = "18.0.1"
 
