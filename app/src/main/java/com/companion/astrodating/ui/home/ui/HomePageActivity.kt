@@ -317,7 +317,20 @@ class HomePageActivity : BaseActivity() {
             updateBottomNavUnreadBadge(totalUnreadCount)
 
             if (fireAlertOnIncrease && previousUnreadCount in 0 until totalUnreadCount && latestConversationId != null) {
-                postNewMessageAlert(chatClient, latestConversationId, conversations[latestConversationId])
+                val latestConversation = conversations[latestConversationId]
+                // Only alert for a message that was actually RECEIVED. The
+                // unread counter (and this "latest conversation" pick) isn't
+                // direction-aware, so sending a message yourself also bumps
+                // it - without this check, the alert would fire using the
+                // *other* party's name, making your own outgoing message
+                // look like it came from them.
+                val lastMessageSenderId = latestConversation?.lastMessage?.from
+                val currentAgoraUserId = StorePreferences.getPrimaryUserAgoraUserName()
+                if (lastMessageSenderId != null && lastMessageSenderId != currentAgoraUserId) {
+                    postNewMessageAlert(chatClient, latestConversationId, latestConversation)
+                } else {
+                    Log.d(TAG, "⏭️ Skipping new-message alert - last message in $latestConversationId was sent by self")
+                }
             }
             previousUnreadCount = totalUnreadCount
 
