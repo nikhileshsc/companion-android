@@ -458,9 +458,27 @@ class MessageFragment : Fragment() {
     }
 
     private fun getTotalUnreadCount(): Int {
-        return conversationArrayList?.sumOf { conversation ->
-            conversation.unreadMsgCount
-        } ?: 0
+        // Compute from the live Agora SDK conversation state
+        // (chatManager().allConversations) instead of this fragment's own
+        // conversationArrayList snapshot. conversationArrayList is populated
+        // asynchronously via doAsyncFetchConversationsFromServer and can lag
+        // behind the SDK's actual state, while HomePageActivity's 15s badge
+        // poller reads chatManager().allConversations directly. Those two
+        // writers computing the same Message-tab badge from two different
+        // (and sometimes differently-stale) sources is why the badge could
+        // get stuck on an old number - whichever writer ran last with the
+        // smaller/older total would "win" and overwrite the other's correct
+        // value. Aligning both to one canonical source fixes that race.
+        val chatClient = agoraChatClient
+        if (chatClient == null || !chatClient.isLoggedInBefore) {
+            return conversationArrayList?.sumOf { it.unreadMsgCount } ?: 0
+        }
+        return try {
+            chatClient.chatManager().allConversations.values.sumOf { it.unreadMsgCount }
+        } catch (e: Exception) {
+            Log.e(TAG, "❌ Error computing total unread count from Agora SDK", e)
+            conversationArrayList?.sumOf { it.unreadMsgCount } ?: 0
+        }
     }
 
     private fun updateBottomNavUnreadBadge(unreadCount: Int) {
